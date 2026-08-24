@@ -1,0 +1,37 @@
+{
+  "name": "XA3 Access Pass #013",
+  "description": "One of 100 limited XA3 Analizator AI Access Pass NFTs on XRPL. This collectible is designed as an access credential for the XA3 ecosystem, subject to the access rules implemented by the XA3 website.",
+  "image": "https://felpazzurra.github.io/XA3-PORTAL/nft-images/013.webp",
+  "external_url": "https://felpazzurra.github.io/XA3-PORTAL/",
+  "collection": {
+    "name": "XA3 Analizator AI Access Pass",
+    "family": "XA3",
+    "supply": 100
+  },
+  "attributes": [
+    {
+      "trait_type": "Edition",
+      "value": "013/100"
+    },
+    {
+      "trait_type": "Network",
+      "value": "XRPL"
+    },
+    {
+      "trait_type": "Collection",
+      "value": "XA3 Access Pass"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Limited"
+    },
+    {
+      "trait_type": "Utility",
+      "value": "XA3 Analizator AI Access"
+    },
+    {
+      "trait_type": "Supply",
+      "value": "100 Limited"
+    }
+  ]
+}
