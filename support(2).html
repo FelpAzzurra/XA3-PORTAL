@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Supporto ufficiale XA3 — assistenza per XA3 Intelligence, Xaman, XRPL e NFT Studio.">
+  <title>XA3 Support</title>
+  <style>
+    :root{
+      color-scheme:dark;
+      --bg:#02070b;
+      --panel:rgba(5,18,28,.88);
+      --line:rgba(75,211,255,.22);
+      --text:#eefaff;
+      --muted:#8fb2c2;
+      --cyan:#69e8ff;
+      --green:#5cf39a;
+      --gold:#f4ce63;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:
+      radial-gradient(circle at 50% 0%,rgba(70,190,255,.14),transparent 28%),
+      radial-gradient(circle at 12% 20%,rgba(80,255,190,.08),transparent 25%),
+      linear-gradient(180deg,#02070b,#03101a 52%,#02070b);color:var(--text)}
+    body{min-height:100vh;display:grid;place-items:center;padding:28px}
+    .shell{width:min(920px,100%)}
+    .hero,.card{
+      border:1px solid var(--line);border-radius:24px;background:var(--panel);
+      backdrop-filter:blur(18px);box-shadow:0 24px 70px rgba(0,0,0,.35),0 0 28px rgba(75,211,255,.05)
+    }
+    .hero{padding:34px}
+    .badge{display:inline-flex;padding:7px 11px;border-radius:999px;border:1px solid rgba(92,243,154,.25);
+      background:rgba(92,243,154,.07);color:#a9ffc9;font-size:11px;font-weight:900;letter-spacing:.08em}
+    h1{font-size:clamp(38px,7vw,74px);line-height:.95;margin:14px 0 12px;letter-spacing:-.05em;
+      background:linear-gradient(90deg,#fff,#b9f5ff,#69e8ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+    p{color:var(--muted);line-height:1.7}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:14px}
+    .card{padding:20px}
+    .card h2{font-size:18px;margin:0 0 8px}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+    a.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 16px;border-radius:13px;
+      text-decoration:none;font-weight:900;border:1px solid var(--line);background:linear-gradient(180deg,#0b2a3b,#061722);color:#eaffff}
+    a.btn.primary{border-color:rgba(105,232,255,.55);box-shadow:0 0 20px rgba(105,232,255,.10)}
+    a.btn.gold{border-color:rgba(244,206,99,.42);color:#fff2b5;background:linear-gradient(180deg,#3c310c,#191304)}
+    .footer{text-align:center;color:#698594;font-size:11px;margin-top:15px}
+    @media(max-width:700px){.grid{grid-template-columns:1fr}.hero{padding:24px}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <span class="badge">XA3 • XRPL • SUPPORT</span>
+      <h1>XA3 Support</h1>
+      <p>
+        Pagina di assistenza ufficiale per XA3 Intelligence, connessione Xaman,
+        funzionalità XRPL, NFT Studio e Access Pass.
+      </p>
+
+      <div class="actions">
+        <a class="btn primary" href="https://felpazzurra.github.io/XA3-PORTAL/">Torna a XA3 Portal</a>
+        <a class="btn gold" href="https://github.com/FelpAzzurra/XA3-PORTAL/issues" target="_blank" rel="noopener">Segnala un problema</a>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2>Connessione Xaman</h2>
+        <p>Verifica di utilizzare il sito XA3 pubblicato in HTTPS e di aver autorizzato il corretto Origin/Redirect URI nella Xaman Developer Console.</p>
+      </article>
+
+      <article class="card">
+        <h2>NFT Studio</h2>
+        <p>Assistenza per i 100 XA3 Access Pass, metadata, mint su XRPL, marketplace, offerte e aste.</p>
+      </article>
+
+      <article class="card">
+        <h2>XA3 Intelligence</h2>
+        <p>Supporto per accesso alle funzionalità XA3 AI, analisi token e verifica dei requisiti di accesso.</p>
+      </article>
+
+      <article class="card">
+        <h2>Sicurezza</h2>
+        <p>XA3 non richiede mai seed phrase, recovery phrase o private key. Le firme XRPL devono essere confermate direttamente tramite Xaman.</p>
+      </article>
+    </section>
+
+    <div class="footer">XA3 Support • Built on XRPL</div>
+  </main>
+</body>
+</html>
