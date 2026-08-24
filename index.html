@@ -6577,6 +6577,16 @@ canvas{filter:saturate(115%) contrast(1.02)}
                 <div class="sf-wallet-balance"><span>Capitale operazione</span><b id="sfWalletTradeCapital">--</b></div>
               </div>
             </div>
+            <div class="sf-preflight" id="sfPreflight">
+              <div class="sf-preflight-head"><span>PRE-FLIGHT SMARTFLOW • DEVONO ESSERE TUTTI VERDI</span><button id="sfPreflightBtn" type="button">↻ VERIFICA TUTTO</button></div>
+              <div class="sf-preflight-grid">
+                <div class="sf-ready-card wait" id="sfReadyWallet"><span>WALLET</span><b id="sfReadyWalletText">VERIFICA…</b></div>
+                <div class="sf-ready-card wait" id="sfReadyRlusd"><span>RLUSD UFFICIALE</span><b id="sfReadyRlusdText">VERIFICA…</b></div>
+                <div class="sf-ready-card wait" id="sfReadyBook"><span>BOOK XRP/RLUSD</span><b id="sfReadyBookText">VERIFICA…</b></div>
+                <div class="sf-ready-card wait" id="sfReadyXaman"><span>XAMAN</span><b id="sfReadyXamanText">VERIFICA…</b></div>
+              </div>
+              <div class="sf-preflight-detail" id="sfPreflightDetail">Collega Xaman e premi VERIFICA TUTTO. SmartFlow non chiederà la firma START finché wallet, saldo RLUSD ufficiale e book XRP/RLUSD non sono leggibili.</div>
+            </div>
           </section>
 
           <section class="sf-hero">
@@ -10513,9 +10523,10 @@ canvas{filter:saturate(115%) contrast(1.02)}
       const txjson=req?.txjson;
       if(!txjson||txjson.TransactionType!=='OfferCreate') throw new Error('Trade SmartFlow non valido.');
       const side=String(req?.side||'TRADE').toUpperCase();
+      const tradeReturnUrl=xa3SmartFlowReturnUrl('trade');
       const payload={
         txjson,
-        options:{force_network:'MAINNET',submit:true},
+        options:{force_network:'MAINNET',submit:true,return_url:{app:tradeReturnUrl,web:tradeReturnUrl}},
         custom_meta:{
           identifier:`xa3-smartflow-${side.toLowerCase()}-${Date.now()}`,
           instruction:String(req?.instruction||`${side} XRP/RLUSD • SmartFlow. Verifica importi e conferma in Xaman.`)
@@ -13970,6 +13981,28 @@ window.AI_EMBEDDED_TOKEN_LOGOS = {
 #smartFlowPage .sf-owner-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
 #smartFlowPage .sf-owner-account{max-width:270px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:8px 10px;border:1px solid rgba(74,222,128,.15);border-radius:10px;background:rgba(34,197,94,.04);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:9px;color:#9be9b7}
 #smartFlowPage .sf-wallet-panel{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(320px,.8fr);gap:12px;margin-top:2px;padding:14px;border:1px solid rgba(56,189,248,.18);border-radius:15px;background:linear-gradient(145deg,rgba(4,18,24,.78),rgba(4,11,9,.86))}
+#smartFlowPage .sf-preflight{grid-column:1/-1;margin-top:12px;padding:12px;border:1px solid rgba(245,196,71,.16);border-radius:15px;background:linear-gradient(145deg,rgba(10,14,13,.94),rgba(4,9,8,.94))}
+#smartFlowPage .sf-preflight-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:9px;flex-wrap:wrap}
+#smartFlowPage .sf-preflight-head span{font-size:9px;font-weight:1000;letter-spacing:.12em;color:#e5c761;text-transform:uppercase}
+#smartFlowPage .sf-preflight-head button{height:30px;padding:0 10px;border:1px solid rgba(245,196,71,.23);border-radius:9px;background:#12170f;color:#f5d56e;font-size:9px;font-weight:1000;cursor:pointer}
+#smartFlowPage .sf-preflight-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+#smartFlowPage .sf-ready-card{min-width:0;padding:10px;border:1px solid rgba(148,163,184,.12);border-radius:11px;background:#050a08;transition:.2s}
+#smartFlowPage .sf-ready-card span{display:block;color:#789087;font-size:8px;font-weight:1000;letter-spacing:.1em}
+#smartFlowPage .sf-ready-card b{display:block;margin-top:4px;color:#aab8b0;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#smartFlowPage .sf-ready-card.ok{border-color:rgba(53,215,125,.35);background:rgba(18,80,49,.12)}
+#smartFlowPage .sf-ready-card.ok b{color:#72e6a1}
+#smartFlowPage .sf-ready-card.bad{border-color:rgba(239,98,98,.34);background:rgba(110,24,24,.10)}
+#smartFlowPage .sf-ready-card.bad b{color:#ff8a8a}
+#smartFlowPage .sf-ready-card.wait{border-color:rgba(245,196,71,.28)}
+#smartFlowPage .sf-ready-card.wait b{color:#f3d678}
+#smartFlowPage .sf-preflight-detail{margin-top:9px;padding:9px 10px;border-radius:10px;background:rgba(255,255,255,.018);color:#8ea298;font-size:9px;line-height:1.5;word-break:break-word}
+#smartFlowPage .sf-preflight-detail strong{color:#d8e4dd}
+#smartFlowPage .sf-preflight-detail.bad{color:#ff9b9b}
+#smartFlowPage .sf-preflight-detail.ok{color:#91eeb1}
+#smartFlowPage .sf-chart-wrap{min-height:420px!important}
+#smartFlowPage #smartFlowChart{display:block!important;width:100%!important;min-height:420px!important;visibility:visible!important;opacity:1!important}
+@media(max-width:820px){#smartFlowPage .sf-preflight-grid{grid-template-columns:1fr 1fr}#smartFlowPage .sf-chart-wrap,#smartFlowPage #smartFlowChart{min-height:360px!important}}
+@media(max-width:480px){#smartFlowPage .sf-preflight-grid{grid-template-columns:1fr 1fr}#smartFlowPage .sf-chart-wrap,#smartFlowPage #smartFlowChart{min-height:330px!important}}
 #smartFlowPage .sf-wallet-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 #smartFlowPage .sf-wallet-title{font-size:9px;font-weight:1000;letter-spacing:.12em;text-transform:uppercase;color:#86e8ff}
 #smartFlowPage .sf-wallet-address{margin-top:6px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;color:#d9fbff;word-break:break-all}
@@ -14130,7 +14163,7 @@ window.AI_EMBEDDED_TOKEN_LOGOS = {
     const bids=(bidR.offers||[]).map(o=>{const rl=sfIssuedValue(o.taker_gets_funded??o.TakerGets??o.taker_gets),xrp=sfAmountValue(o.taker_pays_funded??o.TakerPays??o.taker_pays);return xrp>0&&rl>0?{price:rl/xrp,qty:xrp}:null}).filter(Boolean).sort((a,b)=>b.price-a.price);
     const bestAsk=asks[0]?.price||0,bestBid=bids[0]?.price||0,mid=bestAsk>0&&bestBid>0?(bestAsk+bestBid)/2:(bestAsk||bestBid||0),spread=mid>0&&bestAsk>0&&bestBid>0?(bestAsk-bestBid)/mid*100:0;
     const bidDepth=bids.reduce((a,x)=>a+x.price*x.qty,0),askDepth=asks.reduce((a,x)=>a+x.price*x.qty,0),pressure=(bidDepth+askDepth)>0?bidDepth/(bidDepth+askDepth)*100:50;
-    return {bids,asks,bestBid,bestAsk,mid,spread,pressure,bidDepth,askDepth,source:'XRPL MAINNET • XRP/RLUSD BOOK_OFFERS',at:Date.now()};
+    const snap={bids,asks,bestBid,bestAsk,mid,spread,pressure,bidDepth,askDepth,source:'XRPL MAINNET • XRP/RLUSD BOOK_OFFERS',at:Date.now()};state.bookSnapshot=snap;return snap;
   }
 
   const SF_TF_FILL_OR_KILL=0x00040000;
@@ -14141,14 +14174,33 @@ window.AI_EMBEDDED_TOKEN_LOGOS = {
   const sfSleep=ms=>new Promise(r=>setTimeout(r,ms));
   const sfDrops=x=>String(Math.max(1,Math.floor(Math.max(0,safeNum(x))*1e6)));
   const sfRlusdAmount=v=>({currency:SF_RLUSD_CURRENCY,issuer:SF_RLUSD_ISSUER,value:Math.max(0,safeNum(v)).toFixed(6)});
+  function sfNormalizeCurrency(v){return String(v||'').trim().toUpperCase()}
+  function sfHexAscii(v){
+    const x=sfNormalizeCurrency(v);if(!/^[0-9A-F]{40}$/.test(x))return x;
+    try{let out='';for(let i=0;i<x.length;i+=2){const n=parseInt(x.slice(i,i+2),16);if(!n)break;if(n>=32&&n<=126)out+=String.fromCharCode(n)}return out.toUpperCase()||x}catch(_){return x}
+  }
+  function sfIsOfficialRlusdLine(l){
+    const cur=sfNormalizeCurrency(l?.currency),human=sfHexAscii(cur),issuer=String(l?.account||l?.issuer||'');
+    return issuer===SF_RLUSD_ISSUER&&(cur===SF_RLUSD_CURRENCY||human==='RLUSD'||cur==='RLUSD');
+  }
+  async function sfFetchAllAccountLines(account){
+    let marker=null,all=[];
+    for(let page=0;page<8;page++){
+      const params={account,ledger_index:'validated',limit:400};if(marker)params.marker=marker;
+      const r=await sfXrplRpc('account_lines',params);all.push(...(r?.lines||[]));marker=r?.marker;if(!marker)break;
+    }
+    return all;
+  }
   async function sfAccountBalances(account=SF_OWNER_ACCOUNT){
-    const [info,lines]=await Promise.all([
+    const [info,allLines]=await Promise.all([
       sfXrplRpc('account_info',{account,ledger_index:'validated'}),
-      sfXrplRpc('account_lines',{account,ledger_index:'validated',limit:400})
+      sfFetchAllAccountLines(account)
     ]);
     const xrp=safeNum(info?.account_data?.Balance)/1e6;
-    const line=(lines?.lines||[]).find(l=>String(l.currency||'').toUpperCase()===SF_RLUSD_CURRENCY&&String(l.account||l.issuer||'')===SF_RLUSD_ISSUER);
-    return {xrp,rlusd:line?safeNum(line.balance):0,hasRlusdLine:!!line,raw:{info,lines}};
+    const line=allLines.find(sfIsOfficialRlusdLine)||null;
+    const lookalikes=allLines.filter(l=>{const h=sfHexAscii(l?.currency);return h==='RLUSD'&&!sfIsOfficialRlusdLine(l)});
+    const rlusd=line?safeNum(line.balance):0;
+    return {xrp,rlusd,hasRlusdLine:!!line,line,lookalikes,allLines,raw:{info,lines:{lines:allLines}}};
   }
   function sfWalletAccount(){return sfCurrentXamanAccount()||SF_OWNER_ACCOUNT}
   function sfUpdateTradeCapitalView(rlusd=null){
@@ -14165,13 +14217,49 @@ window.AI_EMBEDDED_TOKEN_LOGOS = {
       const bal=await sfAccountBalances(account||SF_OWNER_ACCOUNT);
       if(x){x.textContent=`${bal.xrp.toLocaleString('en-US',{maximumFractionDigits:6})} XRP`;x.className=bal.xrp>.02?'ok':'bad'}
       if(r){r.textContent=`${bal.rlusd.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:6})} RLUSD`;r.className=bal.hasRlusdLine&&bal.rlusd>0?'ok':'bad'}
-      sfUpdateTradeCapitalView(bal.rlusd);
-      if(st)st.textContent=bal.hasRlusdLine?`✓ Wallet letto dal ledger • trust line RLUSD ufficiale rilevata • aggiornato ${new Date().toLocaleTimeString('it-IT')}`:'Trust line RLUSD ufficiale non rilevata su questo wallet.';
+      state.walletSnapshot=bal;sfUpdateTradeCapitalView(bal.rlusd);sfPaintPreflight({balance:bal});
+      if(st)st.textContent=bal.hasRlusdLine?`✓ Wallet letto dal ledger • RLUSD ufficiale ${bal.rlusd.toFixed(6)} • aggiornato ${new Date().toLocaleTimeString('it-IT')}`:(bal.lookalikes?.length?`⚠ Trovato token chiamato RLUSD ma issuer NON Ripple (${bal.lookalikes.length} trust line). Il bot usa solo RLUSD ufficiale.`:'Trust line RLUSD ufficiale non rilevata su questo wallet.');
       return bal;
     }catch(e){
-      if(x)x.textContent='N/D';if(r)r.textContent='N/D';sfUpdateTradeCapitalView(null);if(st)st.textContent=`Errore lettura wallet XRPL: ${String(e?.message||e)}`;return null;
+      if(x)x.textContent='N/D';if(r)r.textContent='N/D';state.walletSnapshot=null;sfUpdateTradeCapitalView(null);sfPaintPreflight({balance:null});if(st)st.textContent=`Errore lettura wallet XRPL: ${String(e?.message||e)}`;return null;
     }
   }
+  function sfSetReadyCard(id,textId,status,text){
+    const card=$sf(id),label=$sf(textId);if(card){card.classList.remove('ok','bad','wait');card.classList.add(status||'wait')}if(label)label.textContent=text||'VERIFICA…';
+  }
+  function sfPaintPreflight(result=null){
+    const account=sfWalletAccount(),ownerOk=!!account&&account===SF_OWNER_ACCOUNT;
+    const bal=result?.balance||state.walletSnapshot||null,book=result?.book||state.bookSnapshot||null;
+    const xamanOk=ownerOk&&typeof window.XA3_SIGN_SMARTFLOW_START==='function'&&typeof window.XA3_SIGN_SMARTFLOW_TRADE==='function';
+    sfSetReadyCard('sfReadyWallet','sfReadyWalletText',ownerOk?'ok':'bad',ownerOk?'OWNER CONNESSO':account?'ACCOUNT ERRATO':'NON CONNESSO');
+    const cap=Math.max(0,safeNum($sf('sfCapital')?.value||state.capital));
+    const rlusdOk=!!(bal?.hasRlusdLine&&safeNum(bal.rlusd)+1e-8>=cap);
+    sfSetReadyCard('sfReadyRlusd','sfReadyRlusdText',bal?(rlusdOk?'ok':'bad'):'wait',bal?(bal.hasRlusdLine?`${safeNum(bal.rlusd).toFixed(2)} / ${cap.toFixed(2)} RLUSD`:'TRUST LINE ASSENTE'):'LETTURA…');
+    const bookOk=!!(book&&safeNum(book.bestBid)>0&&safeNum(book.bestAsk)>0&&safeNum(book.mid)>0);
+    sfSetReadyCard('sfReadyBook','sfReadyBookText',book?(bookOk?'ok':'bad'):'wait',bookOk?`BID ${safeNum(book.bestBid).toPrecision(7)} • ASK ${safeNum(book.bestAsk).toPrecision(7)}`:book?'BOOK VUOTO':'LETTURA…');
+    sfSetReadyCard('sfReadyXaman','sfReadyXamanText',xamanOk?'ok':'bad',xamanOk?'BRIDGE FIRMA PRONTO':'NON PRONTO');
+    const ready=ownerOk&&rlusdOk&&bookOk&&xamanOk,detail=$sf('sfPreflightDetail');
+    if(detail){detail.className='sf-preflight-detail '+(ready?'ok':'bad');
+      const look=bal?.lookalikes?.length?` • ATTENZIONE: trovate ${bal.lookalikes.length} trust line chiamate RLUSD con issuer diverso da Ripple.`:'';
+      detail.innerHTML=ready?`<strong>✓ PRE-FLIGHT OK.</strong> Capitale ${cap.toFixed(2)} RLUSD • spread ${safeNum(book.spread).toFixed(4)}% • SmartFlow può avviare l’analisi. Ogni BUY/SELL reale richiede conferma Xaman.`:`<strong>PRE-FLIGHT NON COMPLETO.</strong> ${!ownerOk?'Collega il wallet OWNER. ':''}${bal&&!bal.hasRlusdLine?'RLUSD ufficiale Ripple non rilevato. ':''}${bal?.hasRlusdLine&&safeNum(bal.rlusd)<cap?`Saldo RLUSD ${safeNum(bal.rlusd).toFixed(6)} inferiore al capitale ${cap.toFixed(2)}. `:''}${!bookOk?'Book XRP/RLUSD non disponibile. ':''}${!xamanOk?'Bridge Xaman non pronto. ':''}${look}`;
+    }
+    state.preflight={ready,ownerOk,rlusdOk,bookOk,xamanOk,balance:bal,book,at:Date.now()};return state.preflight;
+  }
+  async function sfRunPreflight(showProgress=true){
+    const detail=$sf('sfPreflightDetail');if(showProgress&&detail){detail.className='sf-preflight-detail';detail.textContent='Verifico wallet, RLUSD ufficiale, book XRP/RLUSD e bridge Xaman…'}
+    sfPaintPreflight();
+    let balance=null,book=null;
+    try{balance=await sfRefreshWalletPanel()}catch(_){}
+    try{book=await sfFetchRlusdBook();state.bookSnapshot=book;const p=safeNum(book?.mid)||safeNum(book?.bestBid)||safeNum(book?.bestAsk);if(p>0){sfBootstrapChartFromPrice(p);recordMicroPrice(p);drawChart(state.candles,state.markers)}}catch(e){if(detail)detail.textContent=`Book XRP/RLUSD non leggibile: ${String(e?.message||e)}`}
+    return sfPaintPreflight({balance,book});
+  }
+  let sfBookHeartbeatTimer=0,sfBookHeartbeatBusy=false;
+  function sfStartBookHeartbeat(){
+    clearInterval(sfBookHeartbeatTimer);
+    const run=async()=>{if(sfBookHeartbeatBusy)return;sfBookHeartbeatBusy=true;try{const book=await sfFetchRlusdBook();state.bookSnapshot=book;state.microMarket={...(state.microMarket||{}),bestBid:book.bestBid,bestAsk:book.bestAsk,spreadPct:book.spread,flowPressure:book.pressure,pressure:book.pressure,bidDepth:book.bidDepth,askDepth:book.askDepth,source:book.source};state.bestBid=book.bestBid;state.bestAsk=book.bestAsk;state.bestBidAt=state.bestAskAt=Date.now();const p=safeNum(book.mid)||safeNum(book.bestBid)||safeNum(book.bestAsk);if(p>0){state.lastBookEventAt=Date.now();state.lastTradeAt=state.lastBookEventAt;recordMicroPrice(p);updateChart1mFromTrade(p,0);sfBootstrapChartFromPrice(p);drawChart(state.candles,state.markers)}sfPaintPreflight({book})}catch(_){}finally{sfBookHeartbeatBusy=false}};
+    run();sfBookHeartbeatTimer=setInterval(run,state.running?1800:3000);
+  }
+  function sfEnsureChartVisible(){const cv=$sf('smartFlowChart'),wrap=cv?.parentElement;if(!cv||!wrap)return;cv.style.display='block';cv.style.visibility='visible';cv.style.opacity='1';const h=Math.max(330,Math.round(wrap.getBoundingClientRect().height||620));cv.style.height=h+'px';requestAnimationFrame(()=>drawChart(state.candles,state.markers))}
   function sfBootstrapChartFromPrice(price){
     price=safeNum(price);if(!(price>0))return;
     const now=Math.floor(Date.now()/60000)*60,last=state.chartCandles1m?.at(-1);
@@ -14223,7 +14311,7 @@ window.AI_EMBEDDED_TOKEN_LOGOS = {
   async function sfBuildRealOffer(p){
     const book=await sfFetchRlusdBook();
     const bal=await sfAccountBalances(sfWalletAccount());
-    if(!bal.hasRlusdLine)throw new Error('Trust line RLUSD ufficiale assente sul wallet. Aggiungila in Xaman prima del trading XRP/RLUSD.');
+    if(!bal.hasRlusdLine)throw new Error(bal.lookalikes?.length?'Il wallet contiene un token chiamato RLUSD ma con issuer diverso da Ripple. SmartFlow accetta solo RLUSD ufficiale.':'Trust line RLUSD ufficiale Ripple assente sul wallet.');
     if(!(bal.xrp>.02))throw new Error('Saldo XRP insufficiente per riserva/fee XRPL.');
     if(p.side==='BUY'){
       const requested=Math.max(.000001,safeNum(p.capital||capitalUsd())),spend=Math.min(requested,bal.rlusd);
@@ -15915,7 +16003,7 @@ window.AI_EMBEDDED_TOKEN_LOGOS = {
     const unifiedEntryRisk=unifiedMarketRiskPlan(state.position,price);state.position.marketRiskUsd=unifiedEntryRisk.marketRiskUsd;state.position.totalLossGuideUsd=unifiedEntryRisk.totalLossGuideUsd;state.position.scratchRiskUsd=unifiedEntryRisk.scratchRiskUsd;
     state.position.entryHealth=tradeHealthScore(fill,sig);state.position.healthEma=state.position.entryHealth;state.badTradeHealthTicks=0;state.flowWeakTicks=0;
     state.markers.push({type:'buy',time:Math.floor(Date.now()/1000),price:fill});addEvent('BUY',fill,null,`${decision.mode||'ENTRY'} ${decision.score}/${decision.gate||100} • CORTEX ${safeNum(decision.cortex?.quality)}/100 • edge ${edge.net>=0?'+':''}${edge.net.toFixed(2)}%`);state.entryStreak=0;$sf('sfEngineStatus').textContent=decision.continuationReentry?`BUY REALE • LONG GREEN RE-ENTRY #${safeNum(state.continuationChainCount)} • STOP ADATTIVO`:decision.recoveryReentry?`BUY REALE • FAST RECOVERY RE-ENTRY • 1 TENTATIVO/MIN`:profitShielded?'BUY REALE • PROFIT SHIELD RE-ENTRY • STOP SOTTILE ATTIVO':'BUY REALE • LOSS CAP ADATTIVO + EXIT ENGINE ATTIVI';
-    paintPositionFoundBanner(state.position);setScalperLoader(true,'POSIZIONE TROVATA','BUY APERTO','SmartFlow ha aperto la posizione. Ora cerca un <b>profitto breve</b> e taglia rapidamente una failure.',true);$sf('sfWhy').textContent=`BUY REALE simulato a ${fmt(fill)} • Entry Score ${decision.score}/100. ${decision.downtrendScalp?`Modalità DOWNTREND SCALP: floor NETTO cost-aware da circa ${fmtPnlUsd(Math.max(downtrendFloorUsdFor(capital),estimatedRoundTripUsd*Math.max(.10,(engine.quickCostFloorRatio||.45)*.85)))}.`:`Modalità ${decision.regime?.name||'RANGE'}: profit-lock da circa ${fmtPnlUsd(microUsd)} (${target.toFixed(3)}%) con trailing adattivo; in UPTREND il bot lascia più spazio al movimento.`} ${profitShielded?`PROFIT SHIELD attivo dopo l'ultima chiusura forte: questa re-entry usa uno stop molto sottile adattato a spread/ATR 1M, per evitare di restituire subito il profitto appena incassato. `:''}${state.realized>0?`Profit Bank all'ingresso ${fmtPnlUsd(state.realized)}: lo stop automatico proteggerà la maggior parte dell'utile già realizzato quando il bank è sufficiente rispetto ai costi DEX.`:'Profit Bank non ancora armato: BASE LOSS GUARD comunque attivo.'} BASE LOSS GUARD ${fmtPnlUsd(-entryRiskUsd)} (${entryRiskPct.toFixed(3)}%) • HARD STOP d'emergenza ${fmt(fill*(1-HARD_STOP_PCT/100))} (−${HARD_STOP_PCT.toFixed(2)}% dal BUY). ${executionSimulated?`Esecuzione reale validata; riferimento book: spread/slippage incorporati nei prezzi fill; riserva costi ${edge.reserve.toFixed(3)}%.`:`Costi DEX stimati ${friction.toFixed(3)}% = spread ${edge.spread.toFixed(3)} + slippage ${edge.slip.toFixed(3)} + riserva ${edge.reserve.toFixed(3)}%.`} Profit Engine ${engine.name} • target NETTO effettivo ${fmtPnlUsd(microUsd)} (raw ${fmtPnlUsd(rawMicroUsd)}) • PROFILE MARKET STOP ${fmtPnlUsd(-unifiedEntryRisk.marketRiskUsd)} sul movimento prezzo • LOSS CAP ALL-IN ≈ ${fmtPnlUsd(-unifiedEntryRisk.totalLossGuideUsd)} inclusi costi stimati • costo economico DEX stimato ${fmtPnlUsd(estimatedRoundTripUsd)} (spread + slippage + riserva) • movimento lordo stimato stimato necessario ${fmtPnlUsd(grossNeededUsd)} (${grossNeededPct.toFixed(4)}%). Dopo l’ingresso SmartFlow continua a leggere prezzo, MTF, flow, book e Candlestick Brain. Pattern entry: ${(decision.candleBrain?.patterns||[]).slice(0,3).join(' • ')||'nessun pattern dominante'}. TX ${String(decision?.realTxid||realExec?.txid||'').slice(0,12)}…`;updatePositionUi(price)
+    paintPositionFoundBanner(state.position);setScalperLoader(true,'POSIZIONE TROVATA','BUY APERTO','SmartFlow ha aperto la posizione. Ora cerca un <b>profitto breve</b> e taglia rapidamente una failure.',true);$sf('sfWhy').textContent=`BUY REALE validato a ${fmt(fill)} • Entry Score ${decision.score}/100. ${decision.downtrendScalp?`Modalità DOWNTREND SCALP: floor NETTO cost-aware da circa ${fmtPnlUsd(Math.max(downtrendFloorUsdFor(capital),estimatedRoundTripUsd*Math.max(.10,(engine.quickCostFloorRatio||.45)*.85)))}.`:`Modalità ${decision.regime?.name||'RANGE'}: profit-lock da circa ${fmtPnlUsd(microUsd)} (${target.toFixed(3)}%) con trailing adattivo; in UPTREND il bot lascia più spazio al movimento.`} ${profitShielded?`PROFIT SHIELD attivo dopo l'ultima chiusura forte: questa re-entry usa uno stop molto sottile adattato a spread/ATR 1M, per evitare di restituire subito il profitto appena incassato. `:''}${state.realized>0?`Profit Bank all'ingresso ${fmtPnlUsd(state.realized)}: lo stop automatico proteggerà la maggior parte dell'utile già realizzato quando il bank è sufficiente rispetto ai costi DEX.`:'Profit Bank non ancora armato: BASE LOSS GUARD comunque attivo.'} BASE LOSS GUARD ${fmtPnlUsd(-entryRiskUsd)} (${entryRiskPct.toFixed(3)}%) • HARD STOP d'emergenza ${fmt(fill*(1-HARD_STOP_PCT/100))} (−${HARD_STOP_PCT.toFixed(2)}% dal BUY). ${executionSimulated?`Esecuzione reale validata; riferimento book: spread/slippage incorporati nei prezzi fill; riserva costi ${edge.reserve.toFixed(3)}%.`:`Costi DEX stimati ${friction.toFixed(3)}% = spread ${edge.spread.toFixed(3)} + slippage ${edge.slip.toFixed(3)} + riserva ${edge.reserve.toFixed(3)}%.`} Profit Engine ${engine.name} • target NETTO effettivo ${fmtPnlUsd(microUsd)} (raw ${fmtPnlUsd(rawMicroUsd)}) • PROFILE MARKET STOP ${fmtPnlUsd(-unifiedEntryRisk.marketRiskUsd)} sul movimento prezzo • LOSS CAP ALL-IN ≈ ${fmtPnlUsd(-unifiedEntryRisk.totalLossGuideUsd)} inclusi costi stimati • costo economico DEX stimato ${fmtPnlUsd(estimatedRoundTripUsd)} (spread + slippage + riserva) • movimento lordo stimato stimato necessario ${fmtPnlUsd(grossNeededUsd)} (${grossNeededPct.toFixed(4)}%). Dopo l’ingresso SmartFlow continua a leggere prezzo, MTF, flow, book e Candlestick Brain. Pattern entry: ${(decision.candleBrain?.patterns||[]).slice(0,3).join(' • ')||'nessun pattern dominante'}. TX ${String(decision?.realTxid||realExec?.txid||'').slice(0,12)}…`;updatePositionUi(price)
   }
   function finalizeRealClose(price,reason,realExec={}){
     const pos=state.position;if(!pos)return;
@@ -16120,7 +16208,7 @@ window.AI_EMBEDDED_TOKEN_LOGOS = {
     }finally{state.researchBusy=false}
   }
 
-  function resetSession(keepConfig=true){state.tradePending=null;state.tradeSigning=false;state.tradeRejectedUntil=0;state.stopAfterPending=false;sfPaintPendingTrade();stopMicroStream();$sf('sfStableMarket')?.classList.remove('show','position-open');state.position=null;state.events=[];state.markers=[];state.closed=[];state.realized=0;state.wins=0;state.research=null;state.cooldownUntil=0;state.lastResearchAt=0;state.lastLivePrice=0;state.sessionStartedAt=0;state.sessionEndsAt=0;state.researchBusy=false;state.tickBusy=false;state.lastEntryEvalAt=0;state.entryStreak=0;state.lastEntryScore=0;state.lastEntryDecision=null;state.researchSeq++;state.candles=[];state.book=null;state.microPack=null;state.microMarket=null;state.marketContext=null;state.lastMicroMarketAt=0;state.lastMicroHistoryAt=0;state.badTradeHealthTicks=0;state.lossStreak=0;state.flowWeakTicks=0;state.healthEma=null;state.lastExitAt=0;state.lastExitNet=0;state.lastExitReason='';state.lastExitPrice=0;state.lastExitEntryScore=0;state.continuationChainMinute=0;state.continuationChainCount=0;state.continuationLastEntryAt=0;state.continuationLastExitMark=0;state.recoveryReentryMinute=0;state.recoveryReentryCount=0;state.recoveryLastEntryAt=0;state.lastTradeAt=0;state.lastBookEventAt=0;state.feedDegradedSince=0;state.cortexLast=null;state.riskLockUntil=0;state.sessionPeakRealized=0;state.sessionMaxDrawdown=0;state.wsReconnectAttempts=0;state.wsReconnectTimer=0;state.tickBusySince=0;state.lastWatchdogRepairAt=0;state.streamConnectAt=0;state.profitShieldUntil=0;state.profitShieldExitPrice=0;state.profitShieldBankUsd=0;state.profitShieldReason='';state.priceTrail=[];state.lastPulse=null;state.lastWsEvalAt=0;state.lastFastExitAt=0;state.lastFastEntryAt=0;state.chartCandles1m=[];state.chartLastLoadAt=0;state.stableSince=0;state.stableLastAt=0;state.stabilityWakeUntil=0;state.stabilityBreakAt=0;state.stabilityBreakPrice=0;state.bestBidAt=0;state.bestAskAt=0;state.bestBid=0;state.bestAsk=0;state.bestBidQty=0;state.bestAskQty=0;state.wsOpenedAt=0;state.restPrice=0;state.restPriceAt=0;state.streamKlineAt=0;state.streamSource='REST';state.lastHistorySource='';state.historyAgeMs=0;renderLog();updatePositionUi(0);$sf('sfDoneCycles').textContent=`0 / ${cycleLimitLabel()}`;$sf('sfPnl').textContent='$0.00';$sf('sfWinRate').textContent='--';$sf('sfResearchProgress').style.width='0%';setR('sfResearchVerdict',`PREMI AVVIA • LIVE MICRO-FLOW`);researchPhase('IDLE',0);$sf('sfResearchExplain').textContent=`SmartFlow ADAPTIVE CORTEX VIDEO-FIX usa 0.5s/1s/2s/5s/8s, ampiezza verticale, accelerazione, efficienza direzionale, corpo candela 1M, rebound, uptick, book/flow, qualità feed e loss governor. Un salto forte non viene più perso solo perché contiene pochi uptick; anti-chasing resta attivo sugli impulsi realmente esausti. HARD STOP resta il fail-safe estremo.`;setScalperLoader(false);updateSessionUi()}
+  function resetSession(keepConfig=true){state.tradePending=null;state.tradeSigning=false;state.tradeRejectedUntil=0;state.stopAfterPending=false;sfPaintPendingTrade();stopMicroStream();$sf('sfStableMarket')?.classList.remove('show','position-open');state.position=null;state.events=[];state.markers=[];state.closed=[];state.realized=0;state.wins=0;state.research=null;state.cooldownUntil=0;state.lastResearchAt=0;state.lastLivePrice=0;state.sessionStartedAt=0;state.sessionEndsAt=0;state.researchBusy=false;state.tickBusy=false;state.lastEntryEvalAt=0;state.entryStreak=0;state.lastEntryScore=0;state.lastEntryDecision=null;state.researchSeq++;state.candles=[];state.book=null;state.microPack=null;state.microMarket=null;state.marketContext=null;state.lastMicroMarketAt=0;state.lastMicroHistoryAt=0;state.badTradeHealthTicks=0;state.lossStreak=0;state.flowWeakTicks=0;state.healthEma=null;state.lastExitAt=0;state.lastExitNet=0;state.lastExitReason='';state.lastExitPrice=0;state.lastExitEntryScore=0;state.continuationChainMinute=0;state.continuationChainCount=0;state.continuationLastEntryAt=0;state.continuationLastExitMark=0;state.recoveryReentryMinute=0;state.recoveryReentryCount=0;state.recoveryLastEntryAt=0;state.lastTradeAt=0;state.lastBookEventAt=0;state.feedDegradedSince=0;state.cortexLast=null;state.riskLockUntil=0;state.sessionPeakRealized=0;state.sessionMaxDrawdown=0;state.wsReconnectAttempts=0;state.wsReconnectTimer=0;state.tickBusySince=0;state.lastWatchdogRepairAt=0;state.streamConnectAt=0;state.profitShieldUntil=0;state.profitShieldExitPrice=0;state.profitShieldBankUsd=0;state.profitShieldReason='';state.priceTrail=[];state.lastPulse=null;state.lastWsEvalAt=0;state.lastFastExitAt=0;state.lastFastEntryAt=0;if(!keepConfig){state.chartCandles1m=[];state.chartLastLoadAt=0;}state.stableSince=0;state.stableLastAt=0;state.stabilityWakeUntil=0;state.stabilityBreakAt=0;state.stabilityBreakPrice=0;state.bestBidAt=0;state.bestAskAt=0;state.bestBid=0;state.bestAsk=0;state.bestBidQty=0;state.bestAskQty=0;state.wsOpenedAt=0;state.restPrice=0;state.restPriceAt=0;state.streamKlineAt=0;state.streamSource='REST';state.lastHistorySource='';state.historyAgeMs=0;renderLog();updatePositionUi(0);$sf('sfDoneCycles').textContent=`0 / ${cycleLimitLabel()}`;$sf('sfPnl').textContent='$0.00';$sf('sfWinRate').textContent='--';$sf('sfResearchProgress').style.width='0%';setR('sfResearchVerdict',`PREMI AVVIA • LIVE MICRO-FLOW`);researchPhase('IDLE',0);$sf('sfResearchExplain').textContent=`SmartFlow ADAPTIVE CORTEX VIDEO-FIX usa 0.5s/1s/2s/5s/8s, ampiezza verticale, accelerazione, efficienza direzionale, corpo candela 1M, rebound, uptick, book/flow, qualità feed e loss governor. Un salto forte non viene più perso solo perché contiene pochi uptick; anti-chasing resta attivo sugli impulsi realmente esausti. HARD STOP resta il fail-safe estremo.`;setScalperLoader(false);updateSessionUi()}
   function setScalperLoader(active,title='',stateText='',copy='',success=false){
     const box=$sf('sfLoader');if(!box)return;
     box.classList.toggle('active',!!active);box.classList.toggle('success',!!success);
@@ -16137,33 +16225,40 @@ window.AI_EMBEDDED_TOKEN_LOGOS = {
   }
 
   async function setRunning(on,completed=false,reason='',resumeAuthorized=false){
-    state.running=on;const b=$sf('sfStartBtn');if(b){b.classList.toggle('running',on);b.textContent=on?'■ FERMA SMARTFLOW XRP/RLUSD':'▶ FIRMA E AVVIA SMARTFLOW XRP/RLUSD'}
+    const b=$sf('sfStartBtn');
     clearInterval(state.timer);clearInterval(state.clockTimer);clearInterval(state.exitTimer);clearInterval(state.watchdogTimer);state.timer=0;state.clockTimer=0;state.exitTimer=0;state.watchdogTimer=0;
     if(on){
-      if(!sfPaintOwnerAccess()){state.running=false;if(b){b.classList.remove('running');b.textContent='▶ FIRMA E AVVIA SMARTFLOW XRP/RLUSD'};$sf('sfEngineStatus').textContent='OWNER XAMAN RICHIESTO';$sf('sfWhy').textContent='SmartFlow è privato: collega l’account proprietario configurato.';return}
-      if(!(resumeAuthorized&&sfStartSignatureOk)){
-        try{await sfRequireOwnerStartSignature()}catch(e){state.running=false;sfStartSignatureOk=false;if(b){b.classList.remove('running');b.textContent='▶ FIRMA E AVVIA SMARTFLOW XRP/RLUSD'};$sf('sfEngineStatus').textContent='AVVIO NON AUTORIZZATO';$sf('sfWhy').textContent=String(e?.message||e||'Firma Xaman non completata.');sfPaintOwnerAccess();return}
+      state.running=false;if(b){b.classList.remove('running');b.textContent='VERIFICO SMARTFLOW…';b.disabled=true}
+      try{
+        if(!sfPaintOwnerAccess())throw new Error('Collega il wallet OWNER Xaman prima di avviare SmartFlow.');
+        const pre=await sfRunPreflight(true);
+        if(!pre.ready){const why=$sf('sfPreflightDetail')?.textContent||'Pre-flight non completo.';throw new Error(why)}
+        if(!(resumeAuthorized&&sfStartSignatureOk))await sfRequireOwnerStartSignature();
+        // Dopo la firma ricontrolla il ledger/book: evita di partire con dati vecchi.
+        const post=await sfRunPreflight(false);if(!post.ready)throw new Error('Firma valida, ma il pre-flight XRP/RLUSD non è più completo. Premi VERIFICA TUTTO.');
+        resetSession(true);state.tradePending=null;state.tradeSigning=false;sfPaintPendingTrade();populateTokens();state.token=currentToken();state.capital=capitalUsd();
+        state.walletSnapshot=post.balance;state.bookSnapshot=post.book;sfUpdateTradeCapitalView(post.balance?.rlusd);
+        state.running=true;state.sessionStartedAt=Date.now();state.sessionEndsAt=state.sessionStartedAt+sessionDurationMs();
+        if(b){b.disabled=false;b.classList.add('running');b.textContent='■ FERMA SMARTFLOW XRP/RLUSD'}
+        updateTokenHead();updateSessionUi();setScalperLoader(true,'SCALPER IN AVVIO','PRE-FLIGHT OK','Wallet, RLUSD e book verificati. Avvio micro-flow XRP/RLUSD.',false);
+        const p=safeNum(post.book?.mid)||safeNum(post.book?.bestBid)||safeNum(post.book?.bestAsk);if(p>0){recordMicroPrice(p);sfBootstrapChartFromPrice(p)}
+        startMicroStream(state.token);sfStartBookHeartbeat();state.research=null;researchPhase('FAST BOOT • LIVE MICRO-FLOW',100,'good');setR('sfResearchVerdict','PRE-FLIGHT OK • XRP/RLUSD LIVE','good');
+        if($sf('sfEngineStatus'))$sf('sfEngineStatus').textContent='SMARTFLOW ATTIVO • SCANSIONE ENTRY';
+        if($sf('sfWhy'))$sf('sfWhy').textContent=`Wallet ${sfWalletAccount().slice(0,8)}… • ${safeNum(post.balance?.rlusd).toFixed(6)} RLUSD ufficiali • capitale ${state.capital.toFixed(2)} RLUSD • spread ${safeNum(post.book?.spread).toFixed(4)}%. Quando il setup è valido compare BUY REALE PRONTO e la conferma Xaman.`;
+        loadChart1mHistory(state.token,true).finally(()=>sfEnsureChartVisible());setTimeout(()=>{if(state.running&&!state.microMarketBusy)refreshMicroMarketData(state.token)},700);
+        setTimeout(()=>{if(state.running)liveTick()},40);state.timer=setInterval(()=>{if(!document.hidden&&state.running)liveTick()},900);
+        state.exitTimer=setInterval(()=>{if(!state.running||!state.position)return;const fresh=state.streamPrice>0&&Date.now()-state.streamPriceAt<1800;const px=fresh?state.streamPrice:state.lastLivePrice;if(px>0)fastPositionExit(px,fresh?'EXIT LOOP WS':'EXIT LOOP')},FAST_EXIT_INTERVAL_MS);
+        state.clockTimer=setInterval(()=>{if(!state.running)return;updateSessionUi();if(remainingMs()<=0)endSession('TEMPO SESSIONE SCADUTO')},1000);state.watchdogTimer=setInterval(smartFlowWatchdog,2500);sfEnsureChartVisible();return;
+      }catch(e){
+        state.running=false;if(b){b.disabled=false;b.classList.remove('running');b.textContent='▶ FIRMA E AVVIA SMARTFLOW XRP/RLUSD'}
+        if($sf('sfEngineStatus'))$sf('sfEngineStatus').textContent='SMARTFLOW NON AVVIATO';if($sf('sfWhy'))$sf('sfWhy').textContent=String(e?.message||e||'Pre-flight non completato.');sfPaintOwnerAccess();sfPaintPreflight();return;
       }
-      resetSession(true);state.tradePending=null;state.tradeSigning=false;sfPaintPendingTrade();populateTokens();state.running=true;state.token=currentToken();
-      sfUpdateTradeCapitalView(null);const bootBalance=await sfRefreshWalletPanel();
-      if(bootBalance&&!bootBalance.hasRlusdLine){state.running=false;if(b){b.classList.remove('running');b.textContent='▶ FIRMA E AVVIA SMARTFLOW XRP/RLUSD'};$sf('sfEngineStatus').textContent='RLUSD NON RILEVATO';$sf('sfWhy').textContent='SmartFlow ha letto il ledger ma non rileva la trust line RLUSD ufficiale sul wallet operativo. Premi AGGIORNA SALDI e controlla l’indirizzo mostrato.';return}
-      if(bootBalance&&bootBalance.rlusd+1e-8<capitalUsd()){state.running=false;if(b){b.classList.remove('running');b.textContent='▶ FIRMA E AVVIA SMARTFLOW XRP/RLUSD'};$sf('sfEngineStatus').textContent='CAPITALE RLUSD INSUFFICIENTE';$sf('sfWhy').textContent=`Disponibili ${bootBalance.rlusd.toFixed(6)} RLUSD, capitale per trade impostato ${capitalUsd().toFixed(2)} RLUSD.`;return}
-      if(!bootBalance&&$sf('sfWhy'))$sf('sfWhy').textContent='Firma START valida. Lettura saldo XRPL temporaneamente lenta: SmartFlow parte in analisi e ricontrollerà saldo/trust line prima di ogni BUY reale.';
-      setScalperLoader(true,'SCALPER IN AVVIO','BOOT XRPL','Collego il book XRP/RLUSD e preparo il micro-flow per individuare la prima <b>fascia verde</b>.',false);
-      if(!state.token){state.running=false;if(b){b.classList.remove('running');b.textContent='▶ FIRMA E AVVIA SMARTFLOW XRP/RLUSD'};$sf('sfEngineStatus').textContent='SELEZIONA UN TOKEN';$sf('sfWhy').textContent='Nessun mercato selezionato. Il bot non avvia richieste inutili.';return}
-      state.capital=capitalUsd();state.sessionStartedAt=Date.now();state.sessionEndsAt=state.sessionStartedAt+sessionDurationMs();updateTokenHead();updateSessionUi();$sf('sfEngineStatus').textContent='AVVIO IMMEDIATO • LIVE FLOW 1S/2S/5S';syncScalperLoaderLive();
-      startMicroStream(state.token);state.research=null;researchPhase('FAST BOOT • LIVE MICRO-FLOW',100,'good');setR('sfResearchVerdict','CONNESSIONE XRP/RLUSD LIVE • XRPL','good');if($sf('sfWhy'))$sf('sfWhy').textContent=`Capitale configurato ${capitalUsd().toFixed(2)} RLUSD • saldo verificato ${bootBalance?bootBalance.rlusd.toFixed(6)+' RLUSD':'in retry'} • collego book XRPL. Quando il gate diventa BUY READY comparirà la conferma Xaman.`;
-      loadChart1mHistory(state.token,true);setTimeout(()=>{if(state.running&&!state.microMarketBusy)refreshMicroMarketData(state.token)},900);
-      const tickMs=state.token?._sfKind==='global'?250:900;setTimeout(()=>{if(state.running)liveTick()},35);
-      state.timer=setInterval(()=>{if(!document.hidden&&state.running)liveTick()},tickMs);
-      state.exitTimer=setInterval(()=>{if(!state.running||!state.position)return;const fresh=state.streamPrice>0&&Date.now()-state.streamPriceAt<1800;const p=fresh?state.streamPrice:state.lastLivePrice;if(p>0)fastPositionExit(p,fresh?'EXIT LOOP WS':'EXIT LOOP')},FAST_EXIT_INTERVAL_MS);
-      state.clockTimer=setInterval(()=>{if(!state.running)return;updateSessionUi();if(remainingMs()<=0)endSession('TEMPO SESSIONE SCADUTO')},1000);
-      state.watchdogTimer=setInterval(smartFlowWatchdog,2500);
-    }else{stopMicroStream();$sf('sfStableMarket')?.classList.remove('show');setScalperLoader(false);updateSessionUi();if(completed){$sf('sfEngineStatus').textContent='SESSIONE COMPLETATA';$sf('sfWhy').textContent=`${reason||'Sessione terminata'}. Cicli chiusi ${state.closed.length}/${cycleLimitLabel()} • P&L REALIZZATO ${fmtPnlUsd(state.realized)}.`}}
+    }
+    state.running=false;if(b){b.disabled=false;b.classList.remove('running');b.textContent='▶ FIRMA E AVVIA SMARTFLOW XRP/RLUSD'}stopMicroStream();sfStartBookHeartbeat();$sf('sfStableMarket')?.classList.remove('show');setScalperLoader(false);updateSessionUi();if(completed){$sf('sfEngineStatus').textContent='SESSIONE COMPLETATA';$sf('sfWhy').textContent=`${reason||'Sessione terminata'}. Cicli chiusi ${state.closed.length}/${cycleLimitLabel()} • P&L REALIZZATO ${fmtPnlUsd(state.realized)}.`}
   }
   function requireRestart(msg){if(state.running)setRunning(false);state.research=null;$sf('sfEngineStatus').textContent='CONFIGURAZIONE MODIFICATA';$sf('sfWhy').textContent=msg||'Premi AVVIA per riavviare il LIVE MICRO-FLOW.';setR('sfResearchVerdict','LIVE FLOW DA RIAVVIARE');researchPhase('IDLE',0)}
   function init(){
-    populateTokens();sfPaintOwnerAccess();sfRefreshWalletPanel().catch(()=>{});
+    populateTokens();sfPaintOwnerAccess();sfRefreshWalletPanel().catch(()=>{});sfStartBookHeartbeat();setTimeout(()=>sfRunPreflight(false).catch(()=>{}),250);
     $sf('sfChartTf')?.addEventListener('click',e=>{const b=e.target.closest('[data-sf-chart-tf]');if(!b)return;const iv=Number(b.dataset.sfChartTf);if(![5,15,60].includes(iv))return;state.chartDisplayIntervalMin=iv;$sf('sfChartTf').querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));state.chartCandles1m=[];state.chartLastLoadAt=0;loadChart1mHistory(SF_MARKET,true).catch(()=>{});});
     $sf('sfChartBars')?.addEventListener('click',e=>{const b=e.target.closest('[data-sf-chart-bars]');if(!b)return;state.chartVisibleBars=Math.max(20,Math.min(100,Number(b.dataset.sfChartBars)||70));$sf('sfChartBars').querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));drawChart(state.candles,state.markers)});
     $sf('sfChartRefresh')?.addEventListener('click',()=>{state.chartLastLoadAt=0;loadChart1mHistory(SF_MARKET,true).catch(()=>{})});
@@ -16173,20 +16268,21 @@ window.AI_EMBEDDED_TOKEN_LOGOS = {
     $sf('sfCycles')?.addEventListener('click',e=>{const b=e.target.closest('[data-sf-cycles]');if(!b)return;const raw=String(b.dataset.sfCycles||'5').toLowerCase();state.maxCycles=raw==='unlimited'?Infinity:(Number(raw)||5);$sf('sfCycles').querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));$sf('sfDoneCycles').textContent=`0 / ${cycleLimitLabel()}`;$sf('sfLiveCycle').textContent=`0 / ${cycleLimitLabel()}`;$sf('sfSessionCycles').textContent=`0 / ${cycleLimitLabel()}`;requireRestart(Number.isFinite(state.maxCycles)?`Limite impostato a ${state.maxCycles} cicli: premi AVVIA per iniziare una nuova sessione.`:'Cicli ILLIMITATI attivi: il bot continuerà fino alla scadenza della sessione o alla fermata manuale, rispettando tutti i filtri e le protezioni.')});
     $sf('sfSessionDuration')?.addEventListener('click',e=>{const b=e.target.closest('[data-sf-minutes]');if(!b)return;state.sessionMinutes=Number(b.dataset.sfMinutes)||10;$sf('sfSessionDuration').querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));requireRestart(`Durata impostata a ${sessionDurationLabel()}: premi AVVIA per una nuova sessione.`);updateSessionUi()});
     $sf('sfCapital')?.addEventListener('change',()=>{if(safeNum($sf('sfCapital').value)<5)$sf('sfCapital').value='5';requireRestart(`Capitale reale modificato: ${profitEngineProfile().name} ricalcolerà automaticamente target, stop e timing in base al nuovo capitale.`);updateSessionUi()});
-    $sf('sfCapital')?.addEventListener('input',()=>{renderCapitalGuide();sfUpdateTradeCapitalView(null)});
+    $sf('sfCapital')?.addEventListener('input',()=>{renderCapitalGuide();sfUpdateTradeCapitalView(state.walletSnapshot?.rlusd);sfPaintPreflight()});
     $sf('sfProfitEngine')?.addEventListener('click',e=>{const b=e.target.closest('[data-sf-engine]');if(!b)return;$sf('sfProfitEngine').querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));const pe=profitEngineProfile();const note=$sf('sfProfitEngineNote');if(note)note.textContent=`${pe.name}: ${pe.note}. Target raw stimato ${fmtPnlUsd(microProfitUsd())}; market-loss cap ≈ ${fmtPnlUsd(pe.marketLossPer1000*Math.max(.001,capitalUsd()/1000))}; peak-lock ${Math.round(pe.halfPeakRatio*100)}%; max UPTREND ${Math.round(pe.fastHold.up/1000)}s.`;requireRestart(`Profit Engine ${pe.name} selezionato: target, stop, trailing, peak-lock, durata posizione e re-entry verranno ricalcolati insieme.`);updateSessionUi()});
     $sf('sfStartBtn')?.addEventListener('click',async()=>{if(state.running)endSession('FERMATA MANUALE');else await setRunning(true)});
-    $sf('sfWalletRefreshBtn')?.addEventListener('click',()=>sfRefreshWalletPanel().catch(()=>{}));
+    $sf('sfWalletRefreshBtn')?.addEventListener('click',()=>sfRunPreflight(true).catch(()=>{}));
+    $sf('sfPreflightBtn')?.addEventListener('click',()=>sfRunPreflight(true).catch(()=>{}));
     $sf('sfTradeConfirmBtn')?.addEventListener('click',async()=>{try{await sfConfirmPendingTrade()}catch(e){if($sf('sfWhy'))$sf('sfWhy').textContent=String(e?.message||e)}});
     $sf('sfTradeCancelBtn')?.addEventListener('click',()=>{if(state.tradeSigning)return;state.tradeRejectedUntil=Date.now()+3500;sfClearPendingTrade('Segnale annullato manualmente: nessun ordine è stato firmato o inviato.');if(state.running)syncScalperLoaderLive()});
-    window.addEventListener('resize',()=>{if(state.chartCandles1m.length||state.candles.length)drawChart(state.candles,state.markers)});
+    window.addEventListener('resize',()=>sfEnsureChartVisible());try{const ro=new ResizeObserver(()=>sfEnsureChartVisible());const cw=$sf('smartFlowChart')?.parentElement;if(cw)ro.observe(cw)}catch(_){}
     document.addEventListener('visibilitychange',()=>{if(!document.hidden&&state.running){smartFlowWatchdog();setTimeout(()=>{if(state.running)liveTick()},60)}});
     resetSession(true);
     try{const c=JSON.parse(localStorage.getItem('xa3SmartFlowChartCacheV1')||'null');if(c&&Date.now()-safeNum(c.ts)<6*60*60*1000&&Array.isArray(c.rows)&&c.rows.length>=2){state.chartDisplayIntervalMin=[5,15,60].includes(Number(c.iv))?Number(c.iv):5;state.chartCandles1m=chart1mRows(c.rows);requestAnimationFrame(()=>drawChart(state.candles,state.markers))}}catch(_){}
     // Se Xaman ha riaperto il sito dopo la firma mobile, recupera la sessione e avvia il bot senza seconda firma.
     setTimeout(()=>sfResumeAfterXamanReturn().catch(()=>{}),120);
   }
-  window.smartFlowOnOpen=function(){populateTokens();state.token=SF_MARKET;updateTokenHead();sfPaintOwnerAccess();sfRefreshWalletPanel().catch(()=>{});(async()=>{try{const bk=await sfFetchRlusdBook();const p=safeNum(bk?.mid)||safeNum(bk?.bestBid)||safeNum(bk?.bestAsk);if(p>0)sfBootstrapChartFromPrice(p)}catch(_){}loadChart1mHistory(state.token,false).catch(()=>{});refreshMicroMarketData(state.token).catch(()=>{})})();requestAnimationFrame(()=>drawChart(state.candles,state.markers))};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+  window.smartFlowOnOpen=function(){populateTokens();state.token=SF_MARKET;updateTokenHead();sfPaintOwnerAccess();sfStartBookHeartbeat();sfRunPreflight(false).catch(()=>{});loadChart1mHistory(state.token,false).finally(()=>sfEnsureChartVisible());refreshMicroMarketData(state.token).catch(()=>{});setTimeout(sfEnsureChartVisible,80);setTimeout(sfEnsureChartVisible,450)};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
 </script>
 
