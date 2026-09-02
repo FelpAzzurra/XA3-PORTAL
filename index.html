@@ -20991,5 +20991,748 @@ document.readyState==='loading'?document.addEventListener('DOMContentLoaded',ini
 }
 @media(prefers-reduced-motion:reduce){#newEntriesPage .xa3-explore-sentinel>i,#newEntriesPage .xa3-feed-skeleton:after{animation:none!important}}
 </style>
+
+<!-- XA3 MOBILE APP NAV V1 -->
+<style id="xa3MobileAppNavigationV1">
+/* =========================================================
+   XA3 MOBILE APP NAVIGATION V1 • 2026-09-02
+   Mobile-only visual/navigation layer. Desktop is untouched.
+========================================================= */
+.xa3-mobile-bottom-nav,.xa3-mobile-current-page{display:none}
+
+@media (max-width:780px){
+  :root{--xa3-mobile-nav-h:72px;--xa3-mobile-header-h:58px}
+  html,body{width:100%;height:100%;overscroll-behavior:none}
+  body{overflow:hidden!important;background:#030405!important}
+  .app{height:100dvh!important;min-height:100dvh!important;grid-template-rows:auto minmax(0,1fr)!important;overflow:hidden!important}
+
+  /* Compact app header */
+  .global-future-header,
+  .main-header.global-future-header{
+    position:relative!important;top:auto!important;left:auto!important;right:auto!important;
+    min-height:var(--xa3-mobile-header-h)!important;height:auto!important;
+    padding:6px 8px 6px 54px!important;margin:0!important;
+    border-bottom:1px solid rgba(255,255,255,.07)!important;
+    background:rgba(4,6,8,.96)!important;
+    box-shadow:0 8px 26px rgba(0,0,0,.28)!important;
+    backdrop-filter:blur(18px)!important;-webkit-backdrop-filter:blur(18px)!important;
+    z-index:1100!important;
+  }
+  .global-nav-main{
+    display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;grid-template-areas:"brand actions"!important;
+    gap:8px!important;align-items:center!important;width:100%!important;min-height:46px!important;
+    padding:0!important;margin:0!important;border:0!important;border-radius:0!important;background:none!important;box-shadow:none!important;
+  }
+  .global-brand-zone{grid-area:brand!important;display:flex!important;align-items:center!important;min-width:0!important;padding:0!important;margin:0!important}
+  .global-xa3-mark{display:none!important}
+  .global-brand-copy{min-width:0!important;width:100%!important}
+  .global-title-row{display:flex!important;align-items:center!important;gap:6px!important;min-width:0!important;flex-wrap:nowrap!important}
+  .global-title-row h1{margin:0!important;font-size:15px!important;line-height:1.05!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;letter-spacing:-.025em!important}
+  .global-ecosystem-tag{padding:3px 5px!important;border-radius:6px!important;font-size:5.8px!important;white-space:nowrap!important}
+  .global-future-header .header-ai-claim,.global-future-header .subtitle{display:none!important}
+  .xa3-mobile-current-page{display:block;margin-top:3px;color:#8d99a8;font-size:8px;font-weight:900;letter-spacing:.10em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+  /* Keep hamburger as the access point to secondary pages */
+  .xa3-main-menu-toggle{
+    position:fixed!important;left:8px!important;top:8px!important;width:40px!important;height:40px!important;
+    border-radius:12px!important;z-index:1600!important;
+  }
+  .xa3-main-menu{top:56px!important;bottom:calc(var(--xa3-mobile-nav-h) + env(safe-area-inset-bottom))!important;max-height:none!important}
+
+  /* Remove duplicate page navigation from the top and old bubble-page overlay nav */
+  .global-page-menu,.nav-overlay,.global-market-toggle,.mobile-market-toggle.global-market-toggle{display:none!important}
+
+  /* Home filters: one compact button only; panel opens as a mobile sheet */
+  .global-nav-actions{grid-area:actions!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;min-width:0!important;margin:0!important;padding:0!important}
+  .xa3-mobile-tools-toggle{display:none!important;width:auto!important;min-width:64px!important;height:36px!important;min-height:36px!important;padding:0 10px!important;border-radius:10px!important;font-size:9px!important}
+  body.xa3-mobile-home-active .xa3-mobile-tools-toggle{display:inline-flex!important}
+  .global-future-header .portal-tools{display:none!important}
+  body.xa3-mobile-tools-open .global-future-header .portal-tools{
+    display:grid!important;position:fixed!important;left:8px!important;right:8px!important;top:62px!important;z-index:1550!important;
+    grid-template-columns:1fr 1fr!important;gap:8px!important;width:auto!important;max-height:calc(100dvh - 150px)!important;overflow:auto!important;
+    padding:12px!important;border:1px solid rgba(255,255,255,.10)!important;border-radius:18px!important;
+    background:rgba(7,9,12,.98)!important;box-shadow:0 24px 70px rgba(0,0,0,.58)!important;
+  }
+  body.xa3-mobile-tools-open .global-future-header .portal-tools #search{grid-column:1/-1!important;width:100%!important}
+  body.xa3-mobile-tools-open .global-future-header .portal-tools .field,
+  body.xa3-mobile-tools-open .global-future-header .portal-tools .btn,
+  body.xa3-mobile-tools-open .global-future-header .portal-tools .page-info{height:44px!important;min-height:44px!important;font-size:12px!important}
+
+  /* Real app viewport. Pages scroll internally above the bottom tabs. */
+  .viewport{position:relative!important;min-height:0!important;height:auto!important;overflow:hidden!important;padding:0!important}
+  .page,.content-page{inset:0!important}
+  .content-page{
+    overflow-x:hidden!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch!important;
+    padding-top:0!important;padding-bottom:calc(var(--xa3-mobile-nav-h) + 18px + env(safe-area-inset-bottom))!important;
+    scroll-padding-top:8px!important;scroll-padding-bottom:calc(var(--xa3-mobile-nav-h) + 18px + env(safe-area-inset-bottom))!important;
+    overscroll-behavior-y:contain!important;
+  }
+  #homePage{padding-bottom:calc(var(--xa3-mobile-nav-h) + env(safe-area-inset-bottom))!important}
+  .home-main{height:100%!important;min-height:100%!important}
+
+  /* Compact internal page bars */
+  .viewport>.content-page>.top,.content-page>.top{
+    position:relative!important;top:auto!important;left:auto!important;right:auto!important;
+    min-height:46px!important;margin:7px 8px 8px!important;padding:7px 9px!important;
+    border:1px solid rgba(255,255,255,.065)!important;border-radius:13px!important;
+    background:rgba(7,9,12,.80)!important;backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important;
+    box-shadow:none!important;gap:8px!important;align-items:center!important;flex-wrap:nowrap!important;
+  }
+  .content-page>.top .brand{min-width:0!important;gap:7px!important;font-size:10px!important;line-height:1.2!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  .content-page>.top .globe{width:30px!important;height:30px!important;flex:0 0 30px!important;font-size:16px!important}
+  .content-page>.top>div:last-child{display:flex!important;gap:5px!important;flex:0 0 auto!important;flex-wrap:nowrap!important;overflow-x:auto!important;scrollbar-width:none!important}
+  .content-page>.top>div:last-child::-webkit-scrollbar{display:none!important}
+  .content-page>.top .btn{height:32px!important;min-height:32px!important;padding:0 9px!important;border-radius:9px!important;font-size:8px!important;white-space:nowrap!important}
+
+  /* Mobile content rhythm */
+  .container,#tokenPage .container,#marketPage .market-shell,#xamanWorldPage .xww-shell,#tokenCreatorPage .tc-shell,#nftStudioPage .nft-shell,.xa3-info-shell{
+    width:calc(100% - 16px)!important;max-width:none!important;margin-left:auto!important;margin-right:auto!important;
+    padding-top:8px!important;padding-left:0!important;padding-right:0!important;
+  }
+  .container{padding-bottom:24px!important}
+  .hero{grid-template-columns:1fr!important;gap:12px!important;margin-bottom:16px!important}
+  .hero h1,.hero h2{font-size:clamp(32px,10vw,44px)!important;line-height:.96!important;margin-top:7px!important;margin-bottom:9px!important}
+  .hero p{font-size:12px!important;line-height:1.58!important}
+  .section-head{margin:22px 0 10px!important;gap:5px!important;align-items:flex-start!important;flex-direction:column!important}
+  .section-head h2{font-size:24px!important}
+  .section-head p{font-size:11px!important;line-height:1.45!important}
+  .card,.livebox,.lux-panel,.premium-token-card,.ai-shell,.signal-panel,.tc-panel,.nft-panel{
+    border-radius:16px!important;
+  }
+  .card,.livebox,.lux-panel{padding:14px!important}
+  .premium-token-card{padding:16px!important}
+  .ai-shell{padding:13px!important}
+  .token-layout,.premium-access-grid,.ai-result-grid,.architecture-grid,.news-grid,.learn-grid,.rates-grid,.exchange-grid,.premium-grid{
+    grid-template-columns:1fr!important;gap:10px!important;
+  }
+  .token-stats,.xrp-chart-stats{grid-template-columns:1fr 1fr!important;gap:8px!important}
+  .mini-stat{padding:11px!important;border-radius:13px!important}.mini-stat b{font-size:17px!important}
+  .token-card-head{flex-direction:row!important;align-items:center!important;gap:12px!important}
+  .token-logo-xl,.token-logo-fallback-xl{width:74px!important;height:74px!important;flex:0 0 74px!important}
+  .token-title{font-size:38px!important}.token-price{font-size:34px!important}
+  .canvas-wrap{min-height:235px!important;border-radius:14px!important}.canvas-wrap canvas,canvas{max-width:100%}
+
+  /* Make dense forms and action bars thumb-friendly */
+  input,select,textarea{max-width:100%!important}
+  .field,.btn{border-radius:11px!important}
+  .xa3-actions{display:grid!important;grid-template-columns:1fr!important;gap:8px!important}
+  .xa3-actions>*{width:100%!important;min-height:42px!important}
+
+  /* Token bubble page: status at top, pager above bottom tabs, detail = bottom sheet */
+  #arena{padding-top:50px!important;padding-bottom:132px!important}
+  #homePage .status{
+    left:9px!important;right:9px!important;top:8px!important;bottom:auto!important;max-width:none!important;
+    padding:8px 10px!important;border-radius:11px!important;font-size:9px!important;line-height:1.35!important;
+    background:rgba(5,8,12,.84)!important;backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important;
+  }
+  .mobile-bubble-pager{
+    bottom:calc(var(--xa3-mobile-nav-h) + 8px + env(safe-area-inset-bottom))!important;z-index:900!important;
+    min-height:38px!important;padding:4px 6px!important;
+  }
+  .details{
+    position:absolute!important;left:7px!important;right:7px!important;top:auto!important;
+    bottom:calc(var(--xa3-mobile-nav-h) + 8px + env(safe-area-inset-bottom))!important;
+    width:auto!important;max-width:none!important;max-height:min(68dvh,620px)!important;overflow:auto!important;
+    padding:15px!important;border-radius:22px!important;
+    transform:translateY(calc(100% + 120px))!important;transition:transform .25s ease!important;
+    box-shadow:0 -18px 70px rgba(0,0,0,.55)!important;z-index:1400!important;
+  }
+  .details.open{transform:translateY(0)!important}
+  .details .grid{grid-template-columns:1fr 1fr!important;gap:7px!important}.details .metric{padding:10px!important;border-radius:11px!important}
+  .details h2{font-size:21px!important}.bubble-mini-chart-wrap,#bubbleMiniChart{height:118px!important}
+
+  /* New Entries / Market / Wallet / creator surfaces: reduce oversized desktop spacing */
+  #marketPage .market-shell,#newEntriesPage .xa3-explorer-shell,#walletPage .wallet-page-shell,#tokenCreatorPage .tc-shell,#nftStudioPage .nft-shell,#xamanWorldPage .xww-shell{padding-bottom:20px!important}
+  #marketPage .market-hero,#xamanWorldPage .xww-hero,#tokenCreatorPage .tc-hero,#nftStudioPage .nft-hero,.xa3-info-hero{border-radius:17px!important;padding:16px!important;margin-top:0!important}
+  #xamanWorldPage .xww-title,#tokenCreatorPage h1,#nftStudioPage .nft-hero h1,.xa3-info-hero h1{font-size:clamp(36px,12vw,52px)!important;line-height:.94!important}
+
+  /* Bottom tab bar */
+  .xa3-mobile-bottom-nav{
+    position:fixed;left:7px;right:7px;bottom:7px;z-index:1500;
+    display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:stretch;gap:3px;
+    min-height:var(--xa3-mobile-nav-h);padding:6px 5px max(6px,env(safe-area-inset-bottom));
+    border:1px solid rgba(255,255,255,.10);border-radius:20px;
+    background:linear-gradient(180deg,rgba(14,16,20,.96),rgba(5,7,9,.985));
+    box-shadow:0 18px 50px rgba(0,0,0,.58),0 0 0 1px rgba(255,255,255,.025) inset;
+    backdrop-filter:blur(22px) saturate(120%);-webkit-backdrop-filter:blur(22px) saturate(120%);
+    transition:transform .22s ease,opacity .22s ease;
+  }
+  .xa3-mobile-tab{
+    position:relative;min-width:0;height:58px;padding:5px 2px 4px;border:0;border-radius:14px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+    background:transparent;color:#788493;font-family:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent;
+    transition:background .18s ease,color .18s ease,transform .18s ease;
+  }
+  .xa3-mobile-tab svg{width:20px;height:20px;display:block;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .xa3-mobile-tab span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:8px;font-weight:950;letter-spacing:.025em}
+  .xa3-mobile-tab.active{color:#dff8ff;background:linear-gradient(180deg,rgba(35,94,125,.28),rgba(10,38,54,.22));box-shadow:inset 0 0 0 1px rgba(94,210,255,.14)}
+  .xa3-mobile-tab[data-page-target="tokenPage"].active{color:#caffda;background:linear-gradient(180deg,rgba(24,113,61,.30),rgba(8,52,29,.23));box-shadow:inset 0 0 0 1px rgba(74,222,128,.16)}
+  .xa3-mobile-tab[data-page-target="newEntriesPage"]::after{content:"";position:absolute;top:7px;right:calc(50% - 15px);width:5px;height:5px;border-radius:50%;background:#43e982;box-shadow:0 0 8px rgba(67,233,130,.8)}
+  .xa3-mobile-tab:active{transform:scale(.95)}
+  body.xa3-main-menu-open .xa3-mobile-bottom-nav{transform:translateY(130%);opacity:0;pointer-events:none}
+}
+
+@media (max-width:390px){
+  :root{--xa3-mobile-nav-h:68px}
+  .global-future-header,.main-header.global-future-header{padding-left:51px!important}
+  .global-title-row h1{font-size:13.5px!important}.global-ecosystem-tag{font-size:5.2px!important}
+  .xa3-mobile-tab{height:54px}.xa3-mobile-tab svg{width:18px;height:18px}.xa3-mobile-tab span{font-size:7.4px}
+  .token-stats,.xrp-chart-stats{grid-template-columns:1fr!important}
+}
+</style>
+
+<nav class="xa3-mobile-bottom-nav" id="xa3MobileBottomNav" aria-label="Navigazione mobile XA3">
+  <button class="xa3-mobile-tab active" type="button" data-page-target="homePage" aria-label="Sfere">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="8" r="3"></circle><circle cx="17" cy="7" r="2.5"></circle><circle cx="14" cy="17" r="3.5"></circle><path d="M9.5 9.5l2.3 4M14.7 14l1.3-4.5"></path></svg><span>Sfere</span>
+  </button>
+  <button class="xa3-mobile-tab" type="button" data-page-target="marketPage" aria-label="XRPL Market">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M4 19h16"></path><path d="M7 15l4-4 3 2 5-6"></path></svg><span>Market</span>
+  </button>
+  <button class="xa3-mobile-tab" type="button" data-page-target="newEntriesPage" aria-label="New Entries">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 12h18"></path><circle cx="12" cy="12" r="7"></circle></svg><span>New</span>
+  </button>
+  <button class="xa3-mobile-tab" type="button" data-page-target="tokenPage" aria-label="XA3IA Intelligence">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="6" width="14" height="11" rx="4"></rect><path d="M9 17v3m6-3v3M12 3v3"></path><circle cx="9.5" cy="11.5" r="1"></circle><circle cx="14.5" cy="11.5" r="1"></circle></svg><span>IA</span>
+  </button>
+  <button class="xa3-mobile-tab" type="button" data-page-target="walletPage" aria-label="Portafoglio">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18a2 2 0 0 1 2 2v2H7a3 3 0 1 0 0 6h13v2a2 2 0 0 1-2 2H6.5A2.5 2.5 0 0 1 4 16.5z"></path><path d="M7 9h13v6H7a3 3 0 1 1 0-6z"></path><circle cx="17" cy="12" r=".8"></circle></svg><span>Wallet</span>
+  </button>
+</nav>
+
+<script id="xa3MobileAppNavigationV1Js">
+(function(){
+  const labels={
+    homePage:'Sfere XRPL • mercato live',marketPage:'XRPL Market Live',newEntriesPage:'New Entries Live',
+    tokenPage:'XA3IA Intelligence',walletPage:'Portafoglio Xaman',xa3InfoPage:'XA3 Ecosystem',
+    xamanWorldPage:'Bakeka Projects + News',tokenCreatorPage:'Token Creator',nftStudioPage:'NFT Studio',legalPage:'Legal & Privacy'
+  };
+  const nav=document.getElementById('xa3MobileBottomNav');
+  const tabs=[...(nav?.querySelectorAll('[data-page-target]')||[])];
+  const brand=document.querySelector('.global-brand-copy');
+  let current=document.getElementById('xa3MobileCurrentPage');
+  if(brand&&!current){
+    current=document.createElement('span');current.id='xa3MobileCurrentPage';current.className='xa3-mobile-current-page';current.textContent=labels.homePage;brand.appendChild(current);
+  }
+  function activeId(){
+    return document.querySelector('.viewport>.page.active,.viewport>.content-page.active,.page.active,.content-page.active')?.id||'homePage';
+  }
+  function sync(){
+    const id=activeId();
+    tabs.forEach(b=>{const on=b.dataset.pageTarget===id;b.classList.toggle('active',on);if(on)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
+    document.body.classList.toggle('xa3-mobile-home-active',id==='homePage');
+    if(current)current.textContent=labels[id]||'XA3 Portal';
+    if(id!=='homePage'){
+      document.body.classList.remove('xa3-mobile-tools-open');
+      const f=document.getElementById('xa3MobileToolsToggle');if(f){f.setAttribute('aria-expanded','false');f.textContent='⌕ Filtri'}
+    }
+  }
+  function go(id){
+    try{
+      if(typeof window.activatePage==='function')window.activatePage(id);
+      else if(typeof activatePage==='function')activatePage(id);
+      else document.querySelector('.global-page-menu [data-page-target="'+id+'"],.xa3-main-menu [data-page-target="'+id+'"]')?.click();
+    }catch(_){document.querySelector('.global-page-menu [data-page-target="'+id+'"],.xa3-main-menu [data-page-target="'+id+'"]')?.click()}
+    requestAnimationFrame(sync);setTimeout(sync,40);
+  }
+  tabs.forEach(b=>b.addEventListener('click',e=>{e.preventDefault();go(b.dataset.pageTarget)}));
+  document.addEventListener('click',e=>{if(e.target.closest('[data-page-target]'))setTimeout(sync,0)},true);
+  const vp=document.querySelector('.viewport');
+  if(vp)new MutationObserver(sync).observe(vp,{subtree:true,attributes:true,attributeFilter:['class']});
+  window.addEventListener('resize',sync,{passive:true});
+  sync();setTimeout(sync,100);
+})();
+</script>
+
+
+
+<style id="xa3MobileHamburgerFullHeightFix">
+/* =========================================================
+   XA3 MOBILE HAMBURGER FULL-HEIGHT FIX • 2026-09-02
+   The bottom tab bar is hidden while open, so the drawer can
+   use all remaining screen height and scroll to every item.
+========================================================= */
+@media (max-width:780px){
+  body.xa3-main-menu-open{overflow:hidden!important;touch-action:none}
+
+  .xa3-main-menu-backdrop{
+    position:fixed!important;
+    inset:0!important;
+    z-index:1640!important;
+    background:rgba(1,3,7,.72)!important;
+    backdrop-filter:blur(5px)!important;
+    -webkit-backdrop-filter:blur(5px)!important;
+  }
+
+  .xa3-main-menu-toggle{
+    z-index:1800!important;
+  }
+
+  .xa3-main-menu{
+    position:fixed!important;
+    left:7px!important;
+    right:auto!important;
+    top:54px!important;
+    bottom:0!important;
+    z-index:1750!important;
+    width:min(360px,calc(100vw - 14px))!important;
+    height:auto!important;
+    max-height:calc(100vh - 54px)!important;
+    max-height:calc(100dvh - 54px)!important;
+    box-sizing:border-box!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+    -webkit-overflow-scrolling:touch!important;
+    overscroll-behavior-y:contain!important;
+    touch-action:pan-y!important;
+    scrollbar-gutter:stable!important;
+    padding:12px 11px calc(34px + env(safe-area-inset-bottom))!important;
+    border-radius:18px 18px 0 0!important;
+  }
+
+  body.xa3-main-menu-open .xa3-main-menu{
+    transform:translateX(0)!important;
+    opacity:1!important;
+    pointer-events:auto!important;
+  }
+
+  .xa3-main-menu-head{
+    position:sticky!important;
+    top:-12px!important;
+    z-index:5!important;
+    margin:-12px -11px 10px!important;
+    padding:12px 11px 10px!important;
+    background:linear-gradient(180deg,rgba(18,8,29,.995),rgba(13,8,24,.97) 78%,rgba(13,8,24,.82))!important;
+    border-bottom:1px solid rgba(255,255,255,.07)!important;
+    backdrop-filter:blur(18px)!important;
+    -webkit-backdrop-filter:blur(18px)!important;
+  }
+
+  .xa3-main-menu-section{min-width:0!important}
+  .xa3-main-menu-note{margin-bottom:4px!important}
+
+  /* The tab bar is not needed behind an open drawer. */
+  body.xa3-main-menu-open .xa3-mobile-bottom-nav{
+    display:none!important;
+  }
+}
+
+@media (max-width:390px){
+  .xa3-main-menu{
+    left:5px!important;
+    top:52px!important;
+    width:calc(100vw - 10px)!important;
+    max-height:calc(100vh - 52px)!important;
+    max-height:calc(100dvh - 52px)!important;
+    padding-left:9px!important;
+    padding-right:9px!important;
+  }
+  .xa3-main-menu-head{margin-left:-9px!important;margin-right:-9px!important;padding-left:9px!important;padding-right:9px!important}
+}
+</style>
+<script id="xa3MobileHamburgerFullHeightFixJs">
+(function(){
+  const panel=document.getElementById('xa3MainMenu');
+  const toggle=document.getElementById('xa3MainMenuToggle');
+  if(!panel||!toggle)return;
+  const reset=()=>{ if(document.body.classList.contains('xa3-main-menu-open')) requestAnimationFrame(()=>{panel.scrollTop=0;}); };
+  toggle.addEventListener('click',()=>setTimeout(reset,0));
+  window.addEventListener('orientationchange',()=>setTimeout(reset,80),{passive:true});
+})();
+</script>
+
+
+
+<style id="xa3MobileHamburgerWideV2">
+/* =========================================================
+   XA3 MOBILE HAMBURGER WIDE V2 • 2026-09-02
+   Wide app drawer, lowered below header, compact + fully scrollable.
+========================================================= */
+@media (max-width:780px){
+  body.xa3-main-menu-open{
+    overflow:hidden!important;
+  }
+
+  .xa3-main-menu-backdrop{
+    position:fixed!important;
+    inset:0!important;
+    z-index:1690!important;
+    background:rgba(1,3,7,.78)!important;
+    backdrop-filter:blur(7px)!important;
+    -webkit-backdrop-filter:blur(7px)!important;
+  }
+
+  .xa3-main-menu-toggle{
+    z-index:1900!important;
+  }
+
+  /* IMPORTANT: drawer is now almost full-width and starts lower. */
+  .xa3-main-menu,
+  #xa3MainMenu{
+    position:fixed!important;
+    left:8px!important;
+    right:8px!important;
+    top:78px!important;
+    bottom:8px!important;
+    width:auto!important;
+    min-width:0!important;
+    max-width:none!important;
+    height:auto!important;
+    max-height:none!important;
+    z-index:1820!important;
+    margin:0!important;
+    padding:12px 12px calc(24px + env(safe-area-inset-bottom))!important;
+    border-radius:22px!important;
+    box-sizing:border-box!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+    -webkit-overflow-scrolling:touch!important;
+    overscroll-behavior-y:contain!important;
+    touch-action:pan-y!important;
+    scrollbar-width:thin!important;
+    scrollbar-gutter:stable!important;
+    transform:translateY(16px) scale(.985)!important;
+    transform-origin:top center!important;
+    opacity:0!important;
+    pointer-events:none!important;
+  }
+
+  body.xa3-main-menu-open .xa3-main-menu,
+  body.xa3-main-menu-open #xa3MainMenu{
+    transform:none!important;
+    opacity:1!important;
+    pointer-events:auto!important;
+  }
+
+  .xa3-main-menu-head{
+    position:sticky!important;
+    top:-12px!important;
+    z-index:20!important;
+    margin:-12px -12px 9px!important;
+    padding:12px 12px 10px!important;
+    min-height:54px!important;
+    background:linear-gradient(180deg,rgba(18,8,29,.998),rgba(11,8,22,.985))!important;
+    border-bottom:1px solid rgba(255,255,255,.08)!important;
+    backdrop-filter:blur(20px)!important;
+    -webkit-backdrop-filter:blur(20px)!important;
+  }
+  .xa3-main-menu-head b{font-size:16px!important;line-height:1.1!important}
+  .xa3-main-menu-head small{font-size:7px!important}
+  .xa3-main-menu-head button{width:38px!important;height:38px!important;flex:0 0 38px!important}
+
+  /* Compact sections so substantially more of the menu is visible at once. */
+  .xa3-main-menu-section{
+    gap:7px!important;
+    padding:8px 0!important;
+  }
+  .xa3-main-menu-label{font-size:7px!important}
+
+  .xa3-main-menu .global-wallet-btn,
+  .xa3-main-menu .xrp-ticker,
+  .xa3-main-menu .site-ticker{
+    min-height:42px!important;
+    height:42px!important;
+    border-radius:12px!important;
+  }
+
+  /* Main pages use two wide columns instead of one long narrow stack. */
+  .xa3-main-menu-primary-section,
+  .xa3-main-menu-ecosystem-section,
+  .xa3-main-menu-creator-section{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  .xa3-main-menu-primary-section>.xa3-main-menu-label,
+  .xa3-main-menu-ecosystem-section>.xa3-main-menu-label,
+  .xa3-main-menu-creator-section>.xa3-main-menu-label{
+    grid-column:1/-1!important;
+  }
+
+  .xa3-main-menu .xa3-main-menu-primary-btn,
+  .xa3-main-menu .xa3-main-menu-xa3-btn,
+  .xa3-main-menu .xa3-main-menu-bakeka-btn,
+  .xa3-main-menu .xa3-main-menu-creator-btn{
+    width:100%!important;
+    min-width:0!important;
+    min-height:60px!important;
+    height:auto!important;
+    padding:8px!important;
+    gap:7px!important;
+    border-radius:13px!important;
+    grid-template-columns:34px minmax(0,1fr) 12px!important;
+  }
+
+  .xa3-main-menu-primary-icon,
+  .xa3-menu-xa3-icon,
+  .xa3-menu-bakeka-icon,
+  .xa3-menu-creator-icon{
+    width:32px!important;
+    height:32px!important;
+    min-width:32px!important;
+  }
+  .xa3-main-menu-primary-icon svg,
+  .xa3-menu-xa3-icon svg,
+  .xa3-menu-bakeka-icon svg,
+  .xa3-menu-creator-icon svg{width:26px!important;height:26px!important}
+
+  .xa3-main-menu-primary-btn b,
+  .xa3-main-menu-xa3-btn b,
+  .xa3-main-menu-bakeka-btn b,
+  .xa3-main-menu-creator-btn b{
+    font-size:8.5px!important;
+    line-height:1.15!important;
+    overflow-wrap:anywhere!important;
+  }
+  .xa3-main-menu-primary-btn small,
+  .xa3-main-menu-xa3-btn small,
+  .xa3-main-menu-bakeka-btn small,
+  .xa3-main-menu-creator-btn small{
+    margin-top:2px!important;
+    font-size:6.8px!important;
+    line-height:1.25!important;
+    overflow-wrap:anywhere!important;
+  }
+  .xa3-menu-card-arrow{font-size:16px!important}
+
+  .xa3-main-menu .xa3-main-menu-wallet-btn,
+  .xa3-main-menu .xa3-main-menu-legal-btn{
+    width:100%!important;
+    min-width:0!important;
+    min-height:54px!important;
+    padding:8px 10px!important;
+    border-radius:13px!important;
+  }
+
+  .xa3-main-menu-note{
+    margin:7px 0 0!important;
+    padding:8px!important;
+    font-size:7px!important;
+    line-height:1.35!important;
+  }
+
+  body.xa3-main-menu-open .xa3-mobile-bottom-nav{
+    display:none!important;
+  }
+}
+
+/* Very narrow phones stay full-width, but return the long labels to one column. */
+@media (max-width:355px){
+  .xa3-main-menu,#xa3MainMenu{
+    left:5px!important;right:5px!important;top:72px!important;bottom:5px!important;
+    padding-left:9px!important;padding-right:9px!important;
+  }
+  .xa3-main-menu-primary-section,
+  .xa3-main-menu-ecosystem-section,
+  .xa3-main-menu-creator-section{
+    grid-template-columns:1fr!important;
+  }
+  .xa3-main-menu-primary-section>.xa3-main-menu-label,
+  .xa3-main-menu-ecosystem-section>.xa3-main-menu-label,
+  .xa3-main-menu-creator-section>.xa3-main-menu-label{grid-column:auto!important}
+}
+</style>
+<script id="xa3MobileHamburgerWideV2Js">
+(function(){
+  const panel=document.getElementById('xa3MainMenu');
+  const toggle=document.getElementById('xa3MainMenuToggle');
+  const close=document.getElementById('xa3MainMenuClose');
+  if(!panel||!toggle)return;
+  const reset=()=>requestAnimationFrame(()=>{panel.scrollTop=0;});
+  toggle.addEventListener('click',()=>setTimeout(()=>{if(document.body.classList.contains('xa3-main-menu-open'))reset()},0));
+  close?.addEventListener('click',reset);
+  window.addEventListener('orientationchange',()=>setTimeout(reset,100),{passive:true});
+})();
+</script>
+
+
+
+<!-- XA3 MOBILE COMPLETE HAMBURGER STRUCTURAL FIX -->
+<style id="xa3MobileCompleteMenuStructuralFix">
+@media (max-width:780px){
+  body.xa3-main-menu-open{overflow:hidden!important;touch-action:none!important}
+
+  /* The drawer/backdrop are moved to BODY by JS, outside the filtered header. */
+  body > #xa3MainMenuBackdrop.xa3-main-menu-backdrop{
+    position:fixed!important;inset:0!important;z-index:29990!important;
+    background:rgba(2,2,8,.80)!important;
+    backdrop-filter:blur(7px)!important;-webkit-backdrop-filter:blur(7px)!important;
+  }
+  body > #xa3MainMenuBackdrop[hidden]{display:none!important}
+
+  #xa3MainMenuToggle.xa3-main-menu-toggle{
+    position:fixed!important;left:8px!important;top:8px!important;
+    width:42px!important;height:42px!important;z-index:30020!important;
+  }
+
+  body > #xa3MainMenu.xa3-main-menu{
+    position:fixed!important;
+    left:6px!important;right:6px!important;top:74px!important;bottom:6px!important;
+    width:auto!important;min-width:0!important;max-width:none!important;
+    height:auto!important;min-height:0!important;max-height:none!important;
+    margin:0!important;padding:0 12px calc(26px + env(safe-area-inset-bottom))!important;
+    z-index:30010!important;box-sizing:border-box!important;
+    display:block!important;
+    overflow-x:hidden!important;overflow-y:auto!important;
+    -webkit-overflow-scrolling:touch!important;overscroll-behavior-y:contain!important;
+    touch-action:pan-y!important;scrollbar-gutter:stable!important;
+    border:1px solid rgba(220,154,255,.30)!important;
+    border-radius:24px!important;
+    background:
+      radial-gradient(circle at 8% 0%,rgba(255,76,184,.18),transparent 32%),
+      radial-gradient(circle at 100% 8%,rgba(98,82,255,.19),transparent 34%),
+      linear-gradient(160deg,rgba(21,8,32,.995),rgba(7,9,21,.995))!important;
+    box-shadow:0 30px 90px rgba(0,0,0,.68),0 0 44px rgba(162,77,230,.13)!important;
+    backdrop-filter:blur(24px) saturate(130%)!important;-webkit-backdrop-filter:blur(24px) saturate(130%)!important;
+    transform:translateY(18px)!important;opacity:0!important;pointer-events:none!important;
+    transition:transform .22s ease,opacity .18s ease!important;
+    clip:auto!important;clip-path:none!important;contain:none!important;
+  }
+  body.xa3-main-menu-open > #xa3MainMenu.xa3-main-menu{
+    transform:none!important;opacity:1!important;pointer-events:auto!important;
+  }
+
+  body > #xa3MainMenu .xa3-main-menu-head{
+    position:sticky!important;top:0!important;z-index:25!important;
+    margin:0 -12px 8px!important;padding:13px 12px 11px!important;
+    min-height:58px!important;display:flex!important;align-items:center!important;justify-content:space-between!important;
+    background:linear-gradient(180deg,rgba(20,8,31,.999),rgba(12,8,24,.985))!important;
+    border-bottom:1px solid rgba(255,255,255,.08)!important;
+    backdrop-filter:blur(22px)!important;-webkit-backdrop-filter:blur(22px)!important;
+  }
+  body > #xa3MainMenu .xa3-main-menu-head b{font-size:17px!important;line-height:1.12!important}
+  body > #xa3MainMenu .xa3-main-menu-head small{font-size:7px!important}
+  body > #xa3MainMenu .xa3-main-menu-head button{width:40px!important;height:40px!important;flex:0 0 40px!important}
+
+  /* One full-width readable column: no compressed two-column cards. */
+  body > #xa3MainMenu .xa3-main-menu-section,
+  body > #xa3MainMenu .xa3-main-menu-primary-section,
+  body > #xa3MainMenu .xa3-main-menu-ecosystem-section,
+  body > #xa3MainMenu .xa3-main-menu-creator-section{
+    display:grid!important;grid-template-columns:1fr!important;gap:9px!important;
+    width:100%!important;min-width:0!important;padding:11px 0!important;
+  }
+  body > #xa3MainMenu .xa3-main-menu-label{grid-column:auto!important;font-size:8px!important}
+
+  body > #xa3MainMenu .global-wallet-btn,
+  body > #xa3MainMenu .xrp-ticker,
+  body > #xa3MainMenu .site-ticker{
+    width:100%!important;max-width:none!important;min-width:0!important;
+    min-height:48px!important;height:48px!important;border-radius:13px!important;
+  }
+
+  body > #xa3MainMenu .xa3-main-menu-primary-btn,
+  body > #xa3MainMenu .xa3-main-menu-xa3-btn,
+  body > #xa3MainMenu .xa3-main-menu-bakeka-btn,
+  body > #xa3MainMenu .xa3-main-menu-creator-btn,
+  body > #xa3MainMenu .xa3-main-menu-wallet-btn,
+  body > #xa3MainMenu .xa3-main-menu-legal-btn{
+    display:grid!important;grid-template-columns:46px minmax(0,1fr) 18px!important;
+    align-items:center!important;gap:10px!important;
+    width:100%!important;max-width:none!important;min-width:0!important;
+    min-height:70px!important;height:auto!important;padding:10px 11px!important;
+    border-radius:15px!important;text-align:left!important;
+  }
+  body > #xa3MainMenu .xa3-main-menu-primary-icon,
+  body > #xa3MainMenu .xa3-menu-xa3-icon,
+  body > #xa3MainMenu .xa3-menu-bakeka-icon,
+  body > #xa3MainMenu .xa3-menu-creator-icon,
+  body > #xa3MainMenu .xa3-menu-wallet-icon,
+  body > #xa3MainMenu .xa3-menu-legal-icon{
+    width:42px!important;height:42px!important;min-width:42px!important;
+  }
+  body > #xa3MainMenu .xa3-main-menu-primary-btn b,
+  body > #xa3MainMenu .xa3-main-menu-xa3-btn b,
+  body > #xa3MainMenu .xa3-main-menu-bakeka-btn b,
+  body > #xa3MainMenu .xa3-main-menu-creator-btn b,
+  body > #xa3MainMenu .xa3-main-menu-wallet-btn b,
+  body > #xa3MainMenu .xa3-main-menu-legal-btn b{font-size:11px!important;line-height:1.2!important}
+  body > #xa3MainMenu .xa3-main-menu-primary-btn small,
+  body > #xa3MainMenu .xa3-main-menu-xa3-btn small,
+  body > #xa3MainMenu .xa3-main-menu-bakeka-btn small,
+  body > #xa3MainMenu .xa3-main-menu-creator-btn small,
+  body > #xa3MainMenu .xa3-main-menu-wallet-btn small,
+  body > #xa3MainMenu .xa3-main-menu-legal-btn small{font-size:8px!important;line-height:1.35!important;margin-top:3px!important}
+
+  /* Desktop sphere controls are physically moved into this section on mobile. */
+  body > #xa3MainMenu .xa3-main-menu-desktop-tools-section{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important}
+  body > #xa3MainMenu .xa3-main-menu-desktop-tools-section > .xa3-main-menu-label{grid-column:1/-1!important}
+  body > #xa3MainMenu #mobileMarketPanel.portal-tools{
+    display:grid!important;position:static!important;inset:auto!important;
+    grid-column:1/-1!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+    gap:8px!important;width:100%!important;max-width:none!important;max-height:none!important;
+    padding:0!important;margin:0!important;border:0!important;border-radius:0!important;
+    background:transparent!important;box-shadow:none!important;overflow:visible!important;
+  }
+  body > #xa3MainMenu #mobileMarketPanel #search{grid-column:1/-1!important;width:100%!important}
+  body > #xa3MainMenu #mobileMarketPanel #sort{grid-column:1/-1!important;width:100%!important}
+  body > #xa3MainMenu #mobileMarketPanel .field,
+  body > #xa3MainMenu #mobileMarketPanel .btn,
+  body > #xa3MainMenu #mobileMarketPanel .page-info{
+    width:100%!important;max-width:none!important;min-width:0!important;height:46px!important;min-height:46px!important;
+    font-size:12px!important;border-radius:12px!important;
+  }
+  body > #xa3MainMenu #mobileMarketPanel .page-info{display:flex!important;align-items:center!important;justify-content:center!important}
+
+  /* Header stays clean: all desktop navigation/tools are available inside the drawer. */
+  .global-page-menu{display:none!important}
+  #xa3MobileToolsToggle{display:none!important}
+  body.xa3-main-menu-open .xa3-mobile-bottom-nav{display:none!important}
+
+  body > #xa3MainMenu .xa3-main-menu-note{font-size:8px!important;line-height:1.5!important;margin:10px 0 0!important;padding:10px!important}
+}
+@media (max-width:390px){
+  body > #xa3MainMenu.xa3-main-menu{left:4px!important;right:4px!important;top:68px!important;bottom:4px!important;padding-left:9px!important;padding-right:9px!important;border-radius:20px!important}
+  body > #xa3MainMenu .xa3-main-menu-head{margin-left:-9px!important;margin-right:-9px!important;padding-left:9px!important;padding-right:9px!important}
+  body > #xa3MainMenu .xa3-main-menu-primary-btn,
+  body > #xa3MainMenu .xa3-main-menu-xa3-btn,
+  body > #xa3MainMenu .xa3-main-menu-bakeka-btn,
+  body > #xa3MainMenu .xa3-main-menu-creator-btn,
+  body > #xa3MainMenu .xa3-main-menu-wallet-btn,
+  body > #xa3MainMenu .xa3-main-menu-legal-btn{grid-template-columns:40px minmax(0,1fr) 14px!important;min-height:64px!important;padding:9px!important}
+}
+</style>
+<script id="xa3MobileCompleteMenuStructuralFixJs">
+(function(){
+  const panel=document.getElementById('xa3MainMenu');
+  const backdrop=document.getElementById('xa3MainMenuBackdrop');
+  const toggle=document.getElementById('xa3MainMenuToggle');
+  const tools=document.getElementById('mobileMarketPanel');
+  const toolsHome=tools?.parentNode||null;
+  const toolsNext=tools?.nextSibling||null;
+  let toolsSection=null;
+  if(!panel||!toggle)return;
+
+  function ensureBodyLayer(){
+    if(backdrop && backdrop.parentElement!==document.body)document.body.appendChild(backdrop);
+    if(panel.parentElement!==document.body)document.body.appendChild(panel);
+  }
+  function ensureToolsSection(){
+    if(!tools)return;
+    if(!toolsSection){
+      toolsSection=document.createElement('div');
+      toolsSection.className='xa3-main-menu-section xa3-main-menu-desktop-tools-section';
+      toolsSection.innerHTML='<span class="xa3-main-menu-label">STRUMENTI SFERE • COME SU PC</span>';
+      const primary=panel.querySelector('.xa3-main-menu-primary-section');
+      if(primary)panel.insertBefore(toolsSection,primary); else panel.appendChild(toolsSection);
+    }
+    if(tools.parentElement!==toolsSection)toolsSection.appendChild(tools);
+  }
+  function restoreTools(){
+    if(!tools||!toolsHome)return;
+    if(tools.parentElement===toolsSection){
+      if(toolsNext && toolsNext.parentNode===toolsHome)toolsHome.insertBefore(tools,toolsNext); else toolsHome.appendChild(tools);
+    }
+  }
+  function layout(){
+    const mobile=window.matchMedia('(max-width:780px)').matches;
+    if(mobile){ensureBodyLayer();ensureToolsSection();}
+    else{restoreTools();document.body.classList.remove('xa3-main-menu-open');backdrop&&(backdrop.hidden=true);panel.setAttribute('aria-hidden','true');toggle.setAttribute('aria-expanded','false');}
+  }
+  function resetScroll(){if(document.body.classList.contains('xa3-main-menu-open'))requestAnimationFrame(()=>{panel.scrollTop=0;});}
+
+  layout();
+  toggle.addEventListener('click',()=>setTimeout(()=>{layout();resetScroll()},0));
+  window.addEventListener('resize',layout,{passive:true});
+  window.addEventListener('orientationchange',()=>setTimeout(()=>{layout();resetScroll()},80),{passive:true});
+})();
+</script>
 </body>
 </html>
