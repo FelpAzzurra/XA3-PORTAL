@@ -11214,8 +11214,205 @@ body.xa3-nft-active .global-xa3-mark.xa3-new-top-logo{background:rgba(5,7,13,.96
 }
 </style>
 
+
+<style id="xa3IntroSplashCss">
+:root{
+  --xi-bg:#050308;--xi-panel:#0b0810;--xi-panel2:#14101c;--xi-line:rgba(184,122,255,.20);
+  --xi-text:#fbf9ff;--xi-soft:#c7c0d4;--xi-muted:#817a8e;--xi-purple:#b977ff;--xi-cyan:#5ed9ff;
+  --xi-green:#70efc1;--xi-gold:#ffd16a;--xi-red:#ff7d8d;
+}
+body.xa3-splash-active{overflow:hidden!important;touch-action:none!important}
+#xa3IntroSplash{
+  position:fixed;inset:0;z-index:200000;display:grid;place-items:center;padding:18px;color:var(--xi-text);
+  background:
+    radial-gradient(circle at 18% 8%,rgba(151,76,242,.18),transparent 31%),
+    radial-gradient(circle at 88% 18%,rgba(67,181,255,.12),transparent 27%),
+    radial-gradient(circle at 65% 92%,rgba(82,229,184,.07),transparent 26%),
+    linear-gradient(180deg,#050308 0%,#08050d 58%,#040307 100%);
+  opacity:1;visibility:visible;transition:opacity .52s ease,visibility .52s ease;overflow:hidden;
+}
+#xa3IntroSplash.is-leaving{opacity:0;visibility:hidden;pointer-events:none}
+#xa3IntroSplash:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.72;background-image:linear-gradient(rgba(255,255,255,.016) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.013) 1px,transparent 1px);background-size:46px 46px;mask-image:radial-gradient(circle at 50% 45%,#000 28%,transparent 85%)}
+.xi-shell{position:relative;width:min(1210px,100%);display:grid;grid-template-rows:auto minmax(0,1fr);gap:15px}
+.xi-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;padding:0 4px}
+.xi-brand{min-width:0}.xi-kicker{display:flex;align-items:center;gap:8px;color:#d1bee8;font-size:10px;font-weight:1000;letter-spacing:.16em;text-transform:uppercase}.xi-kicker i{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--xi-cyan),var(--xi-purple));box-shadow:0 0 15px rgba(185,119,255,.5)}
+.xi-brand h1{margin:7px 0 0;font-size:clamp(31px,4.8vw,55px);line-height:.94;letter-spacing:-.055em}.xi-brand h1 span{color:#c9a2ff}.xi-brand p{margin:9px 0 0;color:var(--xi-soft);font-size:13px;max-width:700px}.xi-skip{height:38px;padding:0 13px;border-radius:10px;border:1px solid rgba(255,255,255,.08);background:#0d0912;color:#ddd3ea;font-size:10px;font-weight:950;letter-spacing:.08em;text-transform:uppercase}.xi-skip[disabled]{opacity:.46}
+.xi-stage{position:relative;padding:16px;border:1px solid var(--xi-line);border-radius:27px;background:linear-gradient(180deg,rgba(14,10,19,.95),rgba(8,6,11,.97));box-shadow:0 28px 90px rgba(0,0,0,.48),inset 0 1px rgba(255,255,255,.04);overflow:hidden}
+.xi-stage:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,rgba(179,108,255,.045),transparent 45%);pointer-events:none}
+.xi-scene{position:relative;display:grid;grid-template-columns:1fr 1.08fr 1fr;gap:12px;align-items:stretch}
+.xi-zone{position:relative;min-width:0;border:1px solid rgba(255,255,255,.065);border-radius:21px;background:linear-gradient(160deg,rgba(18,14,25,.96),rgba(9,7,13,.99));overflow:hidden;box-shadow:inset 0 1px rgba(255,255,255,.035),0 12px 30px rgba(0,0,0,.18)}
+.xi-zone-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:11px 13px 9px;border-bottom:1px solid rgba(255,255,255,.05)}.xi-zone-head b{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#f3edff}.xi-zone-head span{font-size:7px;color:#756c82;font-weight:900;letter-spacing:.08em}.xi-body{padding:10px 11px 11px}.xi-real-scene{height:224px;border-radius:16px;overflow:hidden;background:#09070d;border:1px solid rgba(255,255,255,.045)}
+.xi-real-scene svg{display:block;width:100%;height:100%}
+.xi-caption{display:flex;align-items:flex-start;justify-content:space-between;gap:9px;margin-top:9px}.xi-caption b{color:#fff;font-size:11px;letter-spacing:.01em}.xi-caption span{color:#8f879b;font-size:8px;line-height:1.35;text-align:right;max-width:155px}
+.xi-flow{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:13px;color:#8f879b;font-size:8px;font-weight:1000;letter-spacing:.13em;text-transform:uppercase}.xi-flow b{color:#e9e1f5}.xi-flow i{display:block;width:34px;height:1px;background:linear-gradient(90deg,rgba(94,217,255,.20),rgba(185,119,255,.75),rgba(112,239,193,.20));position:relative}.xi-flow i:after{content:"";position:absolute;right:-1px;top:-2px;width:5px;height:5px;border-top:1px solid #b977ff;border-right:1px solid #b977ff;transform:rotate(45deg)}
+.xi-bottom{display:grid;grid-template-columns:minmax(0,1fr) minmax(250px,360px);gap:16px;align-items:end;margin-top:12px}.xi-loading b,.xi-loading span{display:block}.xi-loading b{font-size:11px;color:#f6f0ff}.xi-loading span{margin-top:3px;color:#807889;font-size:8px}.xi-progress{height:8px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden;border:1px solid rgba(255,255,255,.05)}.xi-progress>span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--xi-cyan),var(--xi-purple),var(--xi-green));box-shadow:0 0 15px rgba(185,119,255,.26);animation:xiLoad 4.5s linear forwards}@keyframes xiLoad{to{width:100%}}
+.xi-badge{font-size:7px;font-weight:1000;letter-spacing:.1em;text-transform:uppercase}
+@media(max-width:980px){
+  #xa3IntroSplash{padding:14px}.xi-shell{width:min(820px,100%)}.xi-scene{grid-template-columns:1fr 1fr}.xi-zone.team{grid-column:1/-1}.xi-zone.team .xi-real-scene{height:170px}.xi-real-scene{height:190px}.xi-caption span{max-width:190px}
+}
+@media(max-width:660px){
+  #xa3IntroSplash{padding:10px;place-items:stretch center;overflow:auto}.xi-shell{width:100%;gap:10px;padding:6px 0 8px}.xi-head{align-items:flex-start;gap:10px;padding:0 2px}.xi-brand h1{font-size:29px}.xi-brand p{font-size:10px;line-height:1.35;max-width:330px}.xi-kicker{font-size:7px;letter-spacing:.12em}.xi-skip{height:32px;font-size:8px;padding:0 10px}.xi-stage{padding:9px;border-radius:20px}.xi-scene{grid-template-columns:1fr;gap:8px}.xi-zone.team{grid-column:auto}.xi-zone{border-radius:16px}.xi-zone-head{padding:8px 10px 7px}.xi-zone-head b{font-size:7.5px}.xi-zone-head span{font-size:6px}.xi-body{padding:7px}.xi-real-scene,.xi-zone.team .xi-real-scene{height:145px;border-radius:12px}.xi-caption{margin-top:6px}.xi-caption b{font-size:9px}.xi-caption span{font-size:6.8px;max-width:145px}.xi-flow{gap:6px;margin-top:8px;font-size:6.5px;letter-spacing:.08em}.xi-flow i{width:17px}.xi-bottom{grid-template-columns:1fr;gap:6px;margin-top:8px}.xi-loading b{font-size:9px}.xi-loading span{font-size:6.8px}.xi-progress{height:7px}
+}
+@media(max-width:390px){.xi-real-scene,.xi-zone.team .xi-real-scene{height:132px}.xi-brand p{display:none}.xi-caption span{display:none}.xi-flow{font-size:6px}.xi-flow i{width:12px}}
+</style>
+
+
+
+<style id="xa3MarketVideoResilienceR205">
+#marketPage .xa3-market-mini-media-r113 .xa3-market-tv-screen{position:relative!important;overflow:hidden!important;background:#050208!important}
+#marketPage .xa3-market-mini-media-r113 .xa3-market-tv-screen video{display:block!important;visibility:visible!important;opacity:1!important;transform:none!important;content-visibility:visible!important;background:#050208!important}
+#marketPage .xa3-market-mini-media-r113 .xa3-market-tv{visibility:visible!important;opacity:1!important;content-visibility:visible!important}
+#marketPage .xa3-market-mini-media-r113 .xa3-market-tv.xa3-video-retry .xa3-market-tv-screen:before{content:"MEDIA LOADING";position:absolute;inset:0;display:grid;place-items:center;z-index:0;color:#9f7ab8;font-size:6px;font-weight:900;letter-spacing:.14em;background:radial-gradient(circle at 50% 50%,rgba(168,85,247,.11),transparent 62%),#050208}
+#marketPage .xa3-market-mini-media-r113 .xa3-market-tv-screen video{position:relative;z-index:1}
+</style>
+
+
+<style id="xa3CoverRealismR205">
+/* R205: visual-only realism pass. Dimensions/grid remain exactly as R204. */
+#xa3IntroSplash .xi-real-scene{position:relative;background:#08070b!important;box-shadow:inset 0 0 34px rgba(0,0,0,.62),0 10px 30px rgba(0,0,0,.26)!important}
+#xa3IntroSplash .xi-real-scene:before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.055),transparent 19%,transparent 73%,rgba(185,119,255,.035)),radial-gradient(circle at 72% 16%,rgba(255,218,183,.055),transparent 28%);mix-blend-mode:screen}
+#xa3IntroSplash .xi-real-scene:after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;box-shadow:inset 0 0 38px rgba(0,0,0,.52);background-image:linear-gradient(rgba(255,255,255,.012) 1px,transparent 1px);background-size:100% 3px;opacity:.32}
+#xa3IntroSplash .xi-real-scene svg{position:relative;z-index:1;filter:saturate(.96) contrast(1.06) brightness(.98)}
+</style>
+
 </head>
-<body class="xa3-fairy-active">
+<body class="xa3-fairy-active xa3-splash-active">
+
+
+<div id="xa3IntroSplash" aria-label="XA3 Team introduction" role="dialog" aria-modal="true">
+  <div class="xi-shell">
+    <div class="xi-head">
+      <div class="xi-brand">
+        <div class="xi-kicker"><i></i> XA3 TEAM • AI × XRPL × WEB3</div>
+        <h1>Building the path to <span>Web3.</span></h1>
+        <p>We connect AI, token intelligence and blockchain tools to help users and businesses move on-chain.</p>
+      </div>
+      <button class="xi-skip" id="xa3IntroSkip" type="button" disabled>Loading…</button>
+    </div>
+    <div class="xi-stage">
+      <div class="xi-scene">
+        <section class="xi-zone team">
+          <div class="xi-zone-head"><b>XA3 Team Workspace</b><span>AI-CONNECTED PORTAL</span></div>
+          <div class="xi-body">
+            <div class="xi-real-scene" aria-hidden="true">
+              <svg viewBox="0 0 420 250" preserveAspectRatio="xMidYMid slice">
+<defs>
+ <linearGradient id="r205office" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#1b1820"/><stop offset=".58" stop-color="#100d13"/><stop offset="1" stop-color="#09080a"/></linearGradient>
+ <linearGradient id="r205window" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#202d39"/><stop offset=".48" stop-color="#101923"/><stop offset="1" stop-color="#080d13"/></linearGradient>
+ <linearGradient id="r205desk" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#42372f"/><stop offset=".45" stop-color="#2a211e"/><stop offset="1" stop-color="#151113"/></linearGradient>
+ <linearGradient id="r205skinA" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e3b394"/><stop offset=".6" stop-color="#bd8065"/><stop offset="1" stop-color="#7b5044"/></linearGradient>
+ <linearGradient id="r205skinB" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c98e6f"/><stop offset=".6" stop-color="#9d654f"/><stop offset="1" stop-color="#684035"/></linearGradient>
+ <linearGradient id="r205clothA" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#59466e"/><stop offset="1" stop-color="#241d31"/></linearGradient>
+ <linearGradient id="r205clothB" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#244e63"/><stop offset="1" stop-color="#172630"/></linearGradient>
+ <filter id="r205shadow" x="-30%" y="-30%" width="160%" height="170%"><feGaussianBlur stdDeviation="4"/></filter>
+ <filter id="r205soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.3"/></filter>
+</defs>
+<rect width="420" height="250" fill="url(#r205office)"/>
+<!-- architectural office -->
+<rect x="18" y="18" width="153" height="92" rx="5" fill="url(#r205window)" stroke="#30353d"/><path d="M69 18V110M120 18V110M18 65H171" stroke="#3b4148" stroke-width="2" opacity=".65"/><path d="M25 93L52 73L75 86L107 54L139 73L166 48V107H25Z" fill="#18222d" opacity=".8"/><g fill="#f6d58a" opacity=".65"><rect x="38" y="82" width="3" height="5"/><rect x="88" y="75" width="3" height="5"/><rect x="132" y="67" width="3" height="5"/><rect x="151" y="58" width="3" height="5"/></g>
+<rect x="188" y="18" width="214" height="93" rx="7" fill="#090a0f" stroke="#30263b"/><rect x="199" y="29" width="91" height="70" rx="5" fill="#0c141b"/><rect x="299" y="29" width="92" height="70" rx="5" fill="#100c17"/>
+<!-- realistic dashboard screens -->
+<g opacity=".95"><path d="M208 82C224 67 234 72 247 56s23-6 35-18" fill="none" stroke="#65d9ff" stroke-width="2"/><g stroke-width="1.4"><path d="M213 75V53" stroke="#71e3b8"/><rect x="209" y="59" width="8" height="11" fill="#71e3b8"/><path d="M229 78V49" stroke="#f17d89"/><rect x="225" y="57" width="8" height="14" fill="#f17d89"/><path d="M245 65V42" stroke="#71e3b8"/><rect x="241" y="48" width="8" height="12" fill="#71e3b8"/><path d="M261 57V38" stroke="#71e3b8"/><rect x="257" y="43" width="8" height="10" fill="#71e3b8"/></g><text x="308" y="45" font-size="7" fill="#8c8198" font-family="Arial">AI WORKSPACE</text><rect x="308" y="53" width="57" height="5" rx="2" fill="#2e2935"/><rect x="308" y="53" width="43" height="5" rx="2" fill="#b977ff"/><text x="308" y="70" font-size="12" font-weight="700" fill="#e6dcf1" font-family="Arial">XRPL CONNECTED</text><rect x="308" y="80" width="26" height="8" rx="4" fill="#18372f"/><text x="321" y="86" font-size="5" text-anchor="middle" fill="#70efc1" font-family="Arial">LIVE</text></g>
+<!-- floor and table -->
+<path d="M0 181L420 157V250H0Z" fill="#0a090b"/><ellipse cx="222" cy="219" rx="160" ry="20" fill="#000" opacity=".38" filter="url(#r205shadow)"/><path d="M54 148L328 128L386 185L96 213Z" fill="url(#r205desk)" stroke="#55433d"/>
+<!-- laptop/keyboard details -->
+<g><rect x="140" y="120" width="69" height="45" rx="4" fill="#0a0a0c" stroke="#5b5360"/><rect x="146" y="126" width="57" height="33" rx="2" fill="#0c1720"/><path d="M152 151L164 143L177 147L191 134L199 138" fill="none" stroke="#5ed9ff" stroke-width="2"/><path d="M135 166L215 163L225 169L141 174Z" fill="#2a292b"/><g stroke="#4e4b50" stroke-width="1"><path d="M148 168L209 166"/><path d="M156 171L215 168"/></g></g>
+<g><rect x="252" y="114" width="74" height="48" rx="4" fill="#08090b" stroke="#55495d"/><rect x="258" y="120" width="62" height="35" rx="2" fill="#15101e"/><rect x="265" y="127" width="19" height="5" rx="2" fill="#b977ff"/><rect x="265" y="137" width="44" height="4" rx="2" fill="#4b4051"/><rect x="265" y="146" width="33" height="4" rx="2" fill="#70efc1"/></g>
+<!-- seated teammate left -->
+<g transform="translate(62 104)"><ellipse cx="37" cy="83" rx="31" ry="9" fill="#000" opacity=".28"/><path d="M20 48C23 37 31 32 43 33C55 35 62 42 64 54L66 89H13L14 58Z" fill="url(#r205clothA)"/><path d="M27 35L27 46C31 51 44 51 48 45L48 34Z" fill="url(#r205skinA)"/><ellipse cx="38" cy="24" rx="15" ry="18" fill="url(#r205skinA)"/><path d="M23 24C23 7 51 4 54 23C46 13 32 12 23 24Z" fill="#2e2524"/><path d="M25 19C30 8 46 9 52 19" fill="none" stroke="#1c1718" stroke-width="5" stroke-linecap="round"/><ellipse cx="33" cy="25" rx="1.1" ry="1.5" fill="#2c2020"/><ellipse cx="44" cy="25" rx="1.1" ry="1.5" fill="#2c2020"/><path d="M34 32C37 34 41 34 44 31" fill="none" stroke="#855748" stroke-width="1"/><path d="M17 59L2 74" stroke="url(#r205skinA)" stroke-width="8" stroke-linecap="round"/><path d="M59 58L76 68" stroke="url(#r205skinA)" stroke-width="8" stroke-linecap="round"/><circle cx="2" cy="74" r="4" fill="#c78e73"/><circle cx="77" cy="68" r="4" fill="#c78e73"/></g>
+<!-- seated teammate center -->
+<g transform="translate(164 88)"><ellipse cx="39" cy="100" rx="34" ry="9" fill="#000" opacity=".28"/><path d="M18 53C21 41 30 36 43 36C56 37 64 44 66 57L70 102H11L13 62Z" fill="url(#r205clothB)"/><path d="M30 37L29 49C34 54 47 54 51 48L50 36Z" fill="url(#r205skinA)"/><ellipse cx="40" cy="25" rx="15" ry="18" fill="url(#r205skinA)"/><path d="M25 21C28 6 50 6 55 20C47 14 34 12 25 21Z" fill="#151416"/><path d="M24 20C29 8 49 8 55 21" fill="none" stroke="#0f1011" stroke-width="5"/><ellipse cx="35" cy="26" rx="1.1" ry="1.5" fill="#2c2020"/><ellipse cx="46" cy="26" rx="1.1" ry="1.5" fill="#2c2020"/><path d="M35 33C38 35 42 35 45 32" fill="none" stroke="#855748" stroke-width="1"/><path d="M16 66L0 82" stroke="url(#r205skinA)" stroke-width="8" stroke-linecap="round"/><path d="M64 65L82 78" stroke="url(#r205skinA)" stroke-width="8" stroke-linecap="round"/></g>
+<!-- standing teammate / lead -->
+<g transform="translate(326 78)"><ellipse cx="27" cy="116" rx="26" ry="8" fill="#000" opacity=".28"/><path d="M11 51C15 41 22 37 31 37C42 38 48 45 49 56L52 118H6L8 61Z" fill="#342940"/><path d="M21 37L21 47C25 51 36 52 40 46L40 35Z" fill="url(#r205skinB)"/><ellipse cx="30" cy="25" rx="14" ry="17" fill="url(#r205skinB)"/><path d="M16 21C20 7 39 6 44 21C38 14 25 12 16 21Z" fill="#392922"/><path d="M14 62L-2 84" stroke="url(#r205skinB)" stroke-width="8" stroke-linecap="round"/><path d="M48 63L62 77" stroke="url(#r205skinB)" stroke-width="8" stroke-linecap="round"/><rect x="19" y="58" width="23" height="30" rx="3" fill="#19161c" stroke="#69527a"/><rect x="22" y="62" width="17" height="17" rx="2" fill="#141d26"/><path d="M25 73L29 68L33 71L37 65" fill="none" stroke="#70efc1" stroke-width="1.5"/></g>
+<!-- subtle office practical lights -->
+<circle cx="205" cy="8" r="30" fill="#f4d8b1" opacity=".035" filter="url(#r205shadow)"/><rect x="198" y="0" width="15" height="4" rx="2" fill="#d6b991" opacity=".65"/>
+<g font-family="Arial" font-weight="700"><rect x="22" y="119" width="58" height="17" rx="8" fill="#100d14" stroke="#44364e"/><text x="51" y="130" text-anchor="middle" font-size="7" fill="#d8c1ef">XA3 TEAM</text><rect x="343" y="18" width="51" height="17" rx="8" fill="#0d1418" stroke="#28414b"/><text x="368.5" y="29" text-anchor="middle" font-size="7" fill="#9be9ff">XRPL LIVE</text></g>
+</svg>
+            </div>
+            <div class="xi-caption"><b>Team + AI, one connected portal</b><span>Product, research and blockchain tools working together.</span></div>
+          </div>
+        </section>
+
+        <section class="xi-zone analysis">
+          <div class="xi-zone-head"><b>Token Intelligence</b><span>REAL MARKET WORKFLOW</span></div>
+          <div class="xi-body">
+            <div class="xi-real-scene" aria-hidden="true">
+              <svg viewBox="0 0 420 250" preserveAspectRatio="xMidYMid slice">
+<defs>
+ <linearGradient id="r205aBg" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#111117"/><stop offset="1" stop-color="#08080b"/></linearGradient>
+ <linearGradient id="r205aSkin" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#deb092"/><stop offset=".55" stop-color="#b87860"/><stop offset="1" stop-color="#704438"/></linearGradient>
+ <linearGradient id="r205aDesk" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#403a38"/><stop offset="1" stop-color="#171416"/></linearGradient>
+ <filter id="r205aShadow" x="-30%" y="-30%" width="160%" height="170%"><feGaussianBlur stdDeviation="4"/></filter>
+</defs>
+<rect width="420" height="250" fill="url(#r205aBg)"/>
+<!-- workstation wall -->
+<rect x="24" y="18" width="176" height="112" rx="7" fill="#07090d" stroke="#34303b"/><rect x="216" y="18" width="180" height="112" rx="7" fill="#07090d" stroke="#34303b"/>
+<rect x="36" y="31" width="152" height="86" rx="4" fill="#0e1319"/><g stroke="#26303a" stroke-width="1" opacity=".7"><path d="M36 52H188M36 73H188M36 94H188"/><path d="M66 31V117M96 31V117M126 31V117M156 31V117"/></g>
+<!-- candlestick chart -->
+<g><path d="M45 104C62 94 73 89 87 91S111 71 125 76S150 58 178 45" fill="none" stroke="#67d7ff" stroke-width="2.4"/><g stroke-width="1.4"><path d="M51 96V73" stroke="#6fe8bc"/><rect x="46" y="80" width="10" height="11" fill="#6fe8bc"/><path d="M69 103V74" stroke="#ef7d8d"/><rect x="64" y="83" width="10" height="14" fill="#ef7d8d"/><path d="M87 93V58" stroke="#6fe8bc"/><rect x="82" y="66" width="10" height="19" fill="#6fe8bc"/><path d="M105 84V62" stroke="#6fe8bc"/><rect x="100" y="68" width="10" height="11" fill="#6fe8bc"/><path d="M123 82V49" stroke="#ef7d8d"/><rect x="118" y="57" width="10" height="17" fill="#ef7d8d"/><path d="M141 69V41" stroke="#6fe8bc"/><rect x="136" y="48" width="10" height="14" fill="#6fe8bc"/><path d="M159 63V34" stroke="#6fe8bc"/><rect x="154" y="41" width="10" height="14" fill="#6fe8bc"/></g></g>
+<!-- analytics second screen -->
+<rect x="228" y="31" width="156" height="86" rx="4" fill="#101119"/><text x="240" y="47" font-size="7" fill="#8d8695" font-family="Arial">XA3 AI • TOKEN INTELLIGENCE</text><text x="240" y="68" font-size="16" font-weight="700" fill="#70efc1" font-family="Arial">BULLISH 82%</text><text x="240" y="82" font-size="7" fill="#c3bccb" font-family="Arial">CONFIDENCE • HIGH</text><rect x="240" y="91" width="121" height="6" rx="3" fill="#27262f"/><rect x="240" y="91" width="99" height="6" rx="3" fill="#70efc1"/><g fill="#8f8998" font-size="6" font-family="Arial"><text x="240" y="109">LIQUIDITY</text><text x="288" y="109">MOMENTUM</text><text x="341" y="109">S/R</text></g>
+<!-- environment -->
+<path d="M0 189L420 161V250H0Z" fill="#09090b"/><ellipse cx="220" cy="220" rx="157" ry="19" fill="#000" opacity=".38" filter="url(#r205aShadow)"/><path d="M47 153L337 134L387 189L86 215Z" fill="url(#r205aDesk)" stroke="#51494a"/>
+<!-- keyboard / tablet -->
+<path d="M233 170L313 163L329 176L247 185Z" fill="#1e1d20" stroke="#4b484d"/><g stroke="#565258" stroke-width="1"><path d="M247 173L310 168"/><path d="M254 178L317 172"/></g><rect x="91" y="157" width="58" height="34" rx="4" fill="#0a0a0d" stroke="#55495f"/><rect x="97" y="163" width="46" height="22" rx="2" fill="#131522"/><path d="M103 179L112 170L121 175L133 166L139 169" fill="none" stroke="#b977ff" stroke-width="1.6"/>
+<!-- analyst chair -->
+<ellipse cx="202" cy="221" rx="45" ry="10" fill="#000" opacity=".27"/><path d="M176 184C176 164 187 151 205 151C224 151 236 165 235 186L231 221H180Z" fill="#1a222b" stroke="#34404a"/><path d="M190 199L177 231" stroke="#33383f" stroke-width="6" stroke-linecap="round"/><path d="M221 199L237 231" stroke="#33383f" stroke-width="6" stroke-linecap="round"/>
+<!-- analyst -->
+<g transform="translate(166 102)"><path d="M19 57C24 44 33 39 47 39C61 40 70 48 72 61L77 105H12L14 66Z" fill="#243747"/><path d="M34 40L34 52C39 57 53 57 57 51L56 38Z" fill="url(#r205aSkin)"/><ellipse cx="45" cy="27" rx="16" ry="19" fill="url(#r205aSkin)"/><path d="M29 25C31 8 55 5 62 22C53 14 40 13 29 25Z" fill="#2b2222"/><path d="M30 22C35 9 55 9 62 23" fill="none" stroke="#1a1718" stroke-width="5" stroke-linecap="round"/><ellipse cx="40" cy="28" rx="1.2" ry="1.6" fill="#2d2020"/><ellipse cx="52" cy="28" rx="1.2" ry="1.6" fill="#2d2020"/><path d="M41 35C44 37 49 37 52 34" fill="none" stroke="#845747"/><path d="M16 70L-2 88" stroke="url(#r205aSkin)" stroke-width="9" stroke-linecap="round"/><path d="M69 69L91 83" stroke="url(#r205aSkin)" stroke-width="9" stroke-linecap="round"/><circle cx="-2" cy="88" r="4.5" fill="#b87860"/><circle cx="92" cy="83" r="4.5" fill="#b87860"/></g>
+<!-- phone and notes -->
+<rect x="335" y="166" width="21" height="34" rx="5" fill="#090a0d" stroke="#54505b"/><rect x="338" y="171" width="15" height="23" rx="2" fill="#121826"/><circle cx="345.5" cy="197" r="1.5" fill="#6d6675"/><rect x="55" y="176" width="25" height="17" rx="2" fill="#d2c9ad" opacity=".75" transform="rotate(-8 55 176)"/>
+<g font-family="Arial" font-weight="700"><rect x="27" y="136" width="68" height="18" rx="9" fill="#100d14" stroke="#44364e"/><text x="61" y="148" text-anchor="middle" font-size="7" fill="#dbc3ef">TOKEN / XRP</text><rect x="332" y="136" width="61" height="18" rx="9" fill="#0c1615" stroke="#27453e"/><text x="362.5" y="148" text-anchor="middle" font-size="7" fill="#9cf0d2">AI READY</text></g>
+</svg>
+            </div>
+            <div class="xi-caption"><b>Analyze what the user selects</b><span>Charts, liquidity and AI-assisted market interpretation.</span></div>
+          </div>
+        </section>
+
+        <section class="xi-zone business">
+          <div class="xi-zone-head"><b>Business to Web3</b><span>CONSULTING + TOKENIZATION</span></div>
+          <div class="xi-body">
+            <div class="xi-real-scene" aria-hidden="true">
+              <svg viewBox="0 0 420 250" preserveAspectRatio="xMidYMid slice">
+<defs>
+ <linearGradient id="r205bBg" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#151218"/><stop offset="1" stop-color="#08080a"/></linearGradient>
+ <linearGradient id="r205bSkin1" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e1b091"/><stop offset=".6" stop-color="#b7775f"/><stop offset="1" stop-color="#76483c"/></linearGradient>
+ <linearGradient id="r205bSkin2" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c88d6e"/><stop offset=".6" stop-color="#9e674f"/><stop offset="1" stop-color="#633d33"/></linearGradient>
+ <linearGradient id="r205bWeb" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#5ed9ff"/><stop offset=".48" stop-color="#b977ff"/><stop offset="1" stop-color="#70efc1"/></linearGradient>
+ <filter id="r205bShadow" x="-30%" y="-30%" width="160%" height="170%"><feGaussianBlur stdDeviation="4"/></filter>
+</defs>
+<rect width="420" height="250" fill="url(#r205bBg)"/>
+<!-- client business website monitor -->
+<rect x="21" y="25" width="133" height="93" rx="7" fill="#08090b" stroke="#3a343f"/><rect x="31" y="35" width="113" height="69" rx="4" fill="#eeeae2"/><rect x="31" y="35" width="113" height="13" rx="4" fill="#d6d0c7"/><circle cx="38" cy="41.5" r="2" fill="#a49b91"/><circle cx="45" cy="41.5" r="2" fill="#a49b91"/><rect x="39" y="57" width="41" height="33" rx="4" fill="#b7a489"/><rect x="86" y="57" width="48" height="6" rx="2" fill="#6c6257"/><rect x="86" y="68" width="39" height="4" rx="2" fill="#a99f95"/><rect x="86" y="77" width="44" height="4" rx="2" fill="#a99f95"/><rect x="86" y="87" width="27" height="8" rx="4" fill="#77695c"/><path d="M74 118V130H101V118" fill="none" stroke="#4a454a" stroke-width="4"/><path d="M61 132H113" stroke="#4a454a" stroke-width="5" stroke-linecap="round"/>
+<!-- web3 result monitor -->
+<rect x="269" y="25" width="130" height="93" rx="7" fill="#08090c" stroke="#40324e"/><rect x="279" y="35" width="110" height="69" rx="4" fill="#0d121b"/><rect x="288" y="44" width="91" height="10" rx="4" fill="#171c27"/><circle cx="295" cy="49" r="3" fill="#b977ff"/><text x="303" y="52" font-size="6" fill="#d5c4e7" font-family="Arial">WEB3 BUSINESS</text><g><rect x="288" y="63" width="25" height="25" rx="7" fill="#151025" stroke="#69489a"/><path d="M294 75H307M300.5 68V82" stroke="#b977ff" stroke-width="2"/><rect x="319" y="63" width="60" height="6" rx="3" fill="#2d2940"/><rect x="319" y="74" width="45" height="5" rx="2" fill="#5ed9ff" opacity=".7"/><rect x="319" y="84" width="53" height="5" rx="2" fill="#70efc1" opacity=".75"/></g>
+<!-- conversion path in the middle -->
+<path d="M161 68C183 48 208 48 232 67S257 86 263 68" fill="none" stroke="url(#r205bWeb)" stroke-width="3"/><circle cx="211" cy="61" r="25" fill="#100d17" stroke="#6f4d8d"/><circle cx="211" cy="61" r="17" fill="#151020" stroke="#b977ff" opacity=".95"/><path d="M203 61L209 67L220 54" fill="none" stroke="#70efc1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><text x="211" y="97" text-anchor="middle" font-size="7" fill="#cdb9df" font-family="Arial" font-weight="700">XA3 TOKENIZATION</text>
+<!-- conference environment -->
+<path d="M0 185L420 162V250H0Z" fill="#09090a"/><ellipse cx="215" cy="221" rx="165" ry="19" fill="#000" opacity=".38" filter="url(#r205bShadow)"/><path d="M55 159L334 141L379 188L91 213Z" fill="#322b2a" stroke="#514747"/>
+<!-- meeting documents -->
+<rect x="180" y="162" width="57" height="34" rx="4" fill="#0b0b0e" stroke="#55485f"/><rect x="186" y="168" width="45" height="22" rx="2" fill="#141725"/><circle cx="198" cy="179" r="6" fill="#1e162b" stroke="#9d68ca"/><rect x="208" y="173" width="18" height="3" rx="1.5" fill="#6fe8bc"/><rect x="208" y="180" width="14" height="3" rx="1.5" fill="#5ed9ff"/><rect x="107" y="171" width="43" height="25" rx="2" fill="#d8d0c1" opacity=".82" transform="rotate(-5 107 171)"/><path d="M114 179H141M114 184H136M114 189H131" stroke="#7f7468" stroke-width="1.5"/>
+<!-- XA3 advisor -->
+<g transform="translate(243 101)"><path d="M17 58C21 44 32 38 46 38C60 39 69 47 71 61L74 107H13L14 65Z" fill="#3b2b4c"/><path d="M34 39L34 51C39 56 52 56 57 50L56 37Z" fill="url(#r205bSkin2)"/><ellipse cx="45" cy="26" rx="16" ry="19" fill="url(#r205bSkin2)"/><path d="M29 23C31 8 53 5 61 21C52 14 39 13 29 23Z" fill="#30231f"/><ellipse cx="40" cy="27" rx="1.1" ry="1.5" fill="#251b19"/><ellipse cx="51" cy="27" rx="1.1" ry="1.5" fill="#251b19"/><path d="M40 34C43 36 48 36 51 33" fill="none" stroke="#744a3d"/><path d="M16 72L-5 86" stroke="url(#r205bSkin2)" stroke-width="9" stroke-linecap="round"/><path d="M69 70L92 82" stroke="url(#r205bSkin2)" stroke-width="9" stroke-linecap="round"/></g>
+<!-- client -->
+<g transform="translate(91 110)"><path d="M15 52C20 41 29 36 42 36C54 37 63 44 65 56L69 99H9L11 61Z" fill="#29404c"/><path d="M30 37L30 48C35 53 48 53 52 47L51 35Z" fill="url(#r205bSkin1)"/><ellipse cx="41" cy="24" rx="15" ry="18" fill="url(#r205bSkin1)"/><path d="M26 20C29 6 50 6 56 20C48 13 35 12 26 20Z" fill="#4a3329"/><ellipse cx="36" cy="25" rx="1.1" ry="1.5" fill="#2a201c"/><ellipse cx="47" cy="25" rx="1.1" ry="1.5" fill="#2a201c"/><path d="M36 32C39 34 44 34 47 31" fill="none" stroke="#865747"/><path d="M12 66L-6 81" stroke="url(#r205bSkin1)" stroke-width="9" stroke-linecap="round"/><path d="M63 65L82 78" stroke="url(#r205bSkin1)" stroke-width="9" stroke-linecap="round"/></g>
+<!-- direction labels -->
+<g font-family="Arial" font-weight="700"><rect x="25" y="136" width="61" height="18" rx="9" fill="#151210" stroke="#4b423a"/><text x="55.5" y="148" text-anchor="middle" font-size="7" fill="#d8cbbb">WEB2</text><rect x="174" y="113" width="75" height="18" rx="9" fill="#120d19" stroke="#4b3560"/><text x="211.5" y="125" text-anchor="middle" font-size="7" fill="#d8c0f0">XA3 BRIDGE</text><rect x="334" y="136" width="61" height="18" rx="9" fill="#0d1615" stroke="#2c4b43"/><text x="364.5" y="148" text-anchor="middle" font-size="7" fill="#9cefd2">WEB3</text></g>
+</svg>
+            </div>
+            <div class="xi-caption"><b>We help businesses move on-chain</b><span>Education, tokenization and Web3-ready digital experiences.</span></div>
+          </div>
+        </section>
+      </div>
+      <div class="xi-flow"><b>Connect</b><i></i><b>Analyze</b><i></i><b>Tokenize</b><i></i><b>Build Web3</b></div>
+      <div class="xi-bottom">
+        <div class="xi-loading"><b>Preparing XA3 Portal…</b><span>Loading ecosystem data and XRPL Market media.</span></div>
+        <div class="xi-progress" aria-hidden="true"><span></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="app">
 <header class="main-header global-future-header">
 <button class="xa3-main-menu-toggle" id="xa3MainMenuToggle" type="button" aria-controls="xa3MainMenu" aria-expanded="false" aria-label="Apri menu wallet, ecosistema e community"><span></span><span></span><span></span></button>
@@ -13542,7 +13739,7 @@ body.xa3-nft-active .global-xa3-mark.xa3-new-top-logo{background:rgba(5,7,13,.96
   <div class="xa3-market-tv xa3-market-tv-outside" aria-label="XA3 Market video loop 1">
     <div class="xa3-market-tv-head"><span><i class="xa3-market-tv-dot"></i>XA3 MEDIA</span><span>01</span></div>
     <div class="xa3-market-tv-screen">
-      <video muted loop playsinline preload="none" aria-label="XA3 Market promotional video 1" data-xa3-lazy-video="marketPage">
+      <video muted loop playsinline preload="auto" aria-label="XA3 Market promotional video 1" data-xa3-lazy-video="marketPage">
         <source src="xa3-market-loop.mp4?v=116" type="video/mp4"/>
         Il browser non supporta la riproduzione video HTML5.
       </video>
@@ -13552,7 +13749,7 @@ body.xa3-nft-active .global-xa3-mark.xa3-new-top-logo{background:rgba(5,7,13,.96
   <div class="xa3-market-tv xa3-market-tv-outside" aria-label="XA3 Market video loop 2">
     <div class="xa3-market-tv-head"><span><i class="xa3-market-tv-dot"></i>XA3 MEDIA</span><span>02</span></div>
     <div class="xa3-market-tv-screen">
-      <video muted loop playsinline preload="none" aria-label="XA3 Market promotional video 2" data-xa3-lazy-video="marketPage">
+      <video muted loop playsinline preload="auto" aria-label="XA3 Market promotional video 2" data-xa3-lazy-video="marketPage">
         <source src="xa3-market-clip-02-v2.mp4?v=116" type="video/mp4"/>
         Il browser non supporta la riproduzione video HTML5.
       </video>
@@ -13562,7 +13759,7 @@ body.xa3-nft-active .global-xa3-mark.xa3-new-top-logo{background:rgba(5,7,13,.96
   <div class="xa3-market-tv xa3-market-tv-outside" aria-label="XA3 Market video loop 3">
     <div class="xa3-market-tv-head"><span><i class="xa3-market-tv-dot"></i>XA3 MEDIA</span><span>03</span></div>
     <div class="xa3-market-tv-screen">
-      <video muted loop playsinline preload="none" aria-label="XA3 Market promotional video 3" data-xa3-lazy-video="marketPage">
+      <video muted loop playsinline preload="auto" aria-label="XA3 Market promotional video 3" data-xa3-lazy-video="marketPage">
         <source src="xa3-market-clip-03-v2.mp4?v=116" type="video/mp4"/>
         Il browser non supporta la riproduzione video HTML5.
       </video>
@@ -30316,7 +30513,50 @@ window.XA3_BRIAN_R49_UI={version:'r49-social-continuity-wallet-hologram',socialO
 </script>
 
 <script id="xa3LazyMediaPerformanceController">
-(()=>{'use strict';const sync=()=>{document.querySelectorAll('video[data-xa3-lazy-video]').forEach(v=>{const page=v.dataset.xa3LazyVideo,active=document.getElementById(page)?.classList.contains('active')&&!document.hidden;if(active){if(v.preload==='none')v.preload='metadata';v.play().catch(()=>{})}else{try{v.pause()}catch(_){}}})};document.addEventListener('click',e=>{if(e.target.closest?.('[data-page-target]'))setTimeout(sync,80)},{passive:true});document.addEventListener('visibilitychange',sync,{passive:true});window.addEventListener('load',sync,{once:true});})();
+(()=>{'use strict';
+  const market=document.getElementById('marketPage');
+  const videos=()=>Array.from(document.querySelectorAll('#marketPage video[data-xa3-lazy-video="marketPage"]'));
+  const ensureReady=(v)=>{
+    if(!v)return;
+    try{
+      v.muted=true;v.defaultMuted=true;v.playsInline=true;v.setAttribute('playsinline','');
+      v.preload='auto';v.setAttribute('preload','auto');
+      if(v.readyState===0 || v.networkState===3){ try{v.load()}catch(_){} }
+    }catch(_){}
+  };
+  const startOne=(v)=>{
+    ensureReady(v);
+    const go=()=>{ try{ const p=v.play(); if(p&&typeof p.catch==='function')p.catch(()=>{}); }catch(_){} };
+    if(v.readyState>=2) go();
+    else{
+      v.addEventListener('loadeddata',go,{once:true});
+      v.addEventListener('canplay',go,{once:true});
+      setTimeout(()=>{ensureReady(v);go()},700);
+    }
+  };
+  const sync=()=>{
+    const active=!!market?.classList.contains('active')&&!document.hidden;
+    const list=videos();
+    list.forEach((v,i)=>{
+      ensureReady(v);
+      if(active){ setTimeout(()=>startOne(v),i*70); }
+      else{ try{v.pause()}catch(_){} }
+    });
+  };
+  const warm=()=>videos().forEach((v,i)=>setTimeout(()=>ensureReady(v),i*90));
+  warm();
+  window.addEventListener('load',()=>{warm();sync()},{once:true});
+  document.addEventListener('click',e=>{
+    const b=e.target.closest?.('[data-page-target]');
+    if(b){setTimeout(sync,40);setTimeout(sync,450)}
+  },{passive:true});
+  document.addEventListener('visibilitychange',sync,{passive:true});
+  videos().forEach(v=>{
+    v.addEventListener('stalled',()=>{if(market?.classList.contains('active')){ensureReady(v);setTimeout(()=>startOne(v),250)}});
+    v.addEventListener('error',()=>{v.closest('.xa3-market-tv')?.classList.add('xa3-video-retry');setTimeout(()=>{try{v.load();startOne(v)}catch(_){}},900)});
+    v.addEventListener('playing',()=>v.closest('.xa3-market-tv')?.classList.remove('xa3-video-retry'));
+  });
+})();
 </script>
 
 <style id="xa3ImmersiveStoryV1">
@@ -42656,6 +42896,61 @@ setInterval(()=>{if(!document.hidden&&document.getElementById('dexPage')?.classL
     window.addEventListener('pageshow',attachToActive,{passive:true});
   };
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
+})();
+</script>
+
+
+<script id="xa3IntroSplashScript">
+(function(){
+  const MIN_MS = 4500;
+  const MAX_MS = 9000;
+  const start = Date.now();
+  const body = document.body;
+  const splash = document.getElementById('xa3IntroSplash');
+  const skip = document.getElementById('xa3IntroSkip');
+  if(!splash || !body) return;
+  let allowClose = false;
+  let closed = false;
+  let pageLoaded = document.readyState === 'complete';
+
+  function warmMedia(){
+    try{
+      document.querySelectorAll('#marketPage video[data-xa3-lazy-video="marketPage"]').forEach((v,i)=>{
+        setTimeout(()=>{try{v.muted=true;v.defaultMuted=true;v.playsInline=true;v.preload='auto';v.setAttribute('preload','auto');if(v.readyState<2&&typeof v.load==='function')v.load()}catch(_){}},i*90);
+      });
+      document.querySelectorAll('#marketPage img,.main-header img,.global-future-header img').forEach(el=>{
+        try{if(el.tagName==='IMG'){el.loading='eager';el.decoding='async'}}catch(_){}
+      });
+    }catch(_){}
+  }
+
+  function enableSkip(){
+    allowClose = true;
+    if(skip){ skip.disabled = false; skip.textContent = 'Enter Portal'; }
+  }
+
+  function hideSplash(){
+    if(closed || !allowClose) return;
+    closed = true;
+    splash.classList.add('is-leaving');
+    body.classList.remove('xa3-splash-active');
+    setTimeout(()=>{ try{splash.remove();}catch(_){ if(splash&&splash.parentNode) splash.parentNode.removeChild(splash); } }, 650);
+  }
+
+  function maybeClose(){
+    const elapsed = Date.now() - start;
+    if(elapsed >= MIN_MS && pageLoaded){
+      enableSkip();
+      hideSplash();
+    }
+  }
+
+  warmMedia();
+  setTimeout(enableSkip, MIN_MS);
+  setTimeout(()=>{ pageLoaded = true; maybeClose(); }, MAX_MS);
+  if(skip){ skip.addEventListener('click', ()=>{ if(allowClose) hideSplash(); }); }
+  window.addEventListener('load', ()=>{ pageLoaded = true; maybeClose(); }, {once:true});
+  document.addEventListener('keydown', e=>{ if((e.key==='Escape' || e.key==='Enter') && allowClose) hideSplash(); });
 })();
 </script>
 
